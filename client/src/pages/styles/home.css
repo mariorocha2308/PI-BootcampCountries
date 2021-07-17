@@ -1,0 +1,87 @@
+.navBar{
+    display: flex;
+    justify-content: space-between;
+    background-color: #2f3542;
+    padding: 10px;
+}
+
+.title{
+    margin-left: 50px;
+    color: white;
+    font-size: 25px;
+    font-weight: 700;
+}
+
+/* BOTON FLOTANTE DE CREATE ACTIVITY */
+.float{
+	position:fixed;
+	bottom: 30px;
+	right:40px;
+	background-color:#40739e;
+	color:#FFF;
+	border-radius: 15px;
+    padding: 10px;
+	text-align:center;
+    font-weight: bold;
+    font-size: 18px;
+    border: none;
+}
+
+.float:hover{
+    background-color: #44bd32;
+    cursor: pointer;
+}
+
+/* BOTON DE NEXT PAGE */
+.nextFloat{
+	position:fixed;
+	bottom: 10px;
+	right: 200px;
+    width: 20px;
+    height: 20px;
+	background-color:#6a89cc;
+	color:#FFF;
+	border-radius: 50px;
+    padding: 12px;
+	text-align:center;
+    border: none;
+}
+
+.nextFloat:hover{
+    background-color: #f6b93b;
+    cursor: pointer;
+}
+
+/* BOTON DE BACK PAGE  */
+.beforeFloat{
+	position:fixed;
+	bottom: 10px;
+	right: 250px;
+    width: 20px;
+    height: 20px;
+	background-color: #6a89cc;
+	color:#FFF;
+	border-radius: 50px;
+    padding: 12px;
+	text-align:center;
+    border: none;
+}
+
+.beforeFloat:hover{
+    background-color: #f6b93b;
+    cursor: pointer;
+}
+
+
+/* INPUT Y FILTER STYLE */
+
+.filterBar{
+    display: flex;
+    justify-content: center;
+}
+
+.iconFilter{
+    font-size: 30px;
+    color: white;
+    margin-right: 30px;
+}
