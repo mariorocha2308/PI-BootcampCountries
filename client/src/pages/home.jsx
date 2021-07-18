@@ -9,12 +9,14 @@ import { useHistory } from "react-router-dom";
 
 const Home = () => {
 
+  //* METODO DE REDIRECCION EN EL BOTON PARA IR A LA RUTA 
   const history = useHistory();
   
   const handleRoute = () =>{ 
     history.push("/home/newActivity");
   }
   
+  //* DESPACHA LA ACCION GET_ALL_COUNTRIES
   const dispatch= useDispatch();
   const result= useSelector(state => state.allCountries);
  
