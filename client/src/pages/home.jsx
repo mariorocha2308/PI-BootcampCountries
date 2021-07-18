@@ -4,10 +4,16 @@ import { MdFilterList, MdArrowBack, MdArrowForward } from "react-icons/md";
 import React, { useEffect } from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import { getAllCountries } from '../actions/actions.js';
-
+import { useHistory } from "react-router-dom";
 
 
 const Home = () => {
+
+  const history = useHistory();
+  
+  const handleRoute = () =>{ 
+    history.push("/home/newActivity");
+  }
   
   const dispatch= useDispatch();
   const result= useSelector(state => state.allCountries);
@@ -35,7 +41,7 @@ const Home = () => {
         ))
       }
 
-      <button className="float">Create Activity</button>
+      <button className="float" onClick={handleRoute}>Create Activity</button>
 
       <h3 className="nextFloat">
         <MdArrowForward />
