@@ -7,7 +7,7 @@ const router = require('express').Router();
 //* Obtener un listado de los primeros 10 países
 
 router.get('/countries', async (req, res) => {
-    const name = req.query.name
+    const {name, offset} = req.query
 
     if (name) {
         
@@ -17,9 +17,9 @@ router.get('/countries', async (req, res) => {
         request(`https://restcountries.eu/rest/v2/name/${name}`, {json: true}, function(error, response, data){
 
             if (name.charAt(0).toUpperCase() + name.slice(1).toLowerCase() === data[0].name) {
-                return res.json(data)
+                return res.status(200).json(data)
             } else{
-                return res.send('PAIS NO ENCONTRADO')
+                return res.status(404).send('PAIS NO ENCONTRADO')
             }
             
         })   
@@ -53,8 +53,8 @@ router.get('/countries', async (req, res) => {
         });    
             
             try {
-                const limitCountries = await Country.findAll({limit:10})
-                return res.json(limitCountries)
+                const limitCountries = await Country.findAll({limit:10, offset: offset})
+                return res.status(200).json(limitCountries)
             } catch (error) {
                 
             }
@@ -78,7 +78,7 @@ router.get('/countries/:idPais', async(req, res) => {
             include:[Activity]
         })
 
-        return res.json(country)
+        return res.status(200).json(country)
 
      } catch(err){
       res.status(404).json(err)
@@ -86,4 +86,14 @@ router.get('/countries/:idPais', async(req, res) => {
 
 })
 
+router.get('/countries/extra/all', async (req, res) => {
+
+    try {
+        const all = await Country.findAll()
+        res.status(200).json(all)
+    } catch (error) {
+        res.status(404).send('CARGA FALLIDA')
+    }
+    
+})
 module.exports = router;
