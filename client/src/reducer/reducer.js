@@ -1,7 +1,9 @@
-import {GET_ALL_COUNTRIES } from '../actions/actions.js'
+import {GET_ALL_COUNTRIES, GET_COUNTRY_DETAIL, NEXT_PAGE, PREV_PAGE} from '../actions/actions.js'
 
 const initialState = {
     allCountries: [],
+    countryDetail:{},
+    offset: 0,
 }
 
 export default function rootReducer(state = initialState, action){
@@ -10,6 +12,23 @@ export default function rootReducer(state = initialState, action){
             return{
                 ...state,
                 allCountries: action.payload
+            }
+        case GET_COUNTRY_DETAIL:
+            return{
+                ...state,
+                countryDetail: action.payload
+            }
+        case NEXT_PAGE: 
+            return {
+                ...state,
+                allCountries: action.payload.page,
+                offset: action.payload.offset
+            }
+        case PREV_PAGE: 
+            return {
+                ...state,
+                allCountries: action.payload.page,
+                offset: action.payload.offset
             }
     
         default:

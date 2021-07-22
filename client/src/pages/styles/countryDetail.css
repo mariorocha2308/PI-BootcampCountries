@@ -1,0 +1,77 @@
+ /* .pageDetail{
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+} */
+
+.navBarDetail{
+    color: white;
+    background-color: #2f3542;
+    padding: 8px;
+}
+
+.navTitle{
+    margin: 0;
+}
+
+.countryDetail{
+    margin: auto;
+    display: flex;
+    justify-content:  space-around;
+    align-items: center;
+    width: 800px;
+    height: 400px;
+    margin-top: 30px;
+    background-color: #2f3542;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;    
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.imgDetail{
+    width: 350px;
+    height: 300px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.idDetail {
+    color: rgb(221, 221, 221);
+    margin: 0;
+}
+
+.nameDetail{
+    color: #487eb0;
+    margin: 0;
+}
+
+.continentDetail{
+    color: #fbc531;
+    margin: 0;
+}
+
+.capitalDetail {
+    color: rgb(221, 221, 221);
+    margin: 0;
+}
+.subregionDetail {
+    color: rgb(221, 221, 221);
+    margin: 0;
+}
+.areaDetail {
+    color: rgb(221, 221, 221);
+    margin: 0;
+}
+.populationDetail {
+    color: rgb(221, 221, 221);
+    margin: 0;
+}
+
+/* TODO: CREAR ESTILOS PARA EL DIV DE ACTIVIDADES TURISTICAS */
+
+
+
+

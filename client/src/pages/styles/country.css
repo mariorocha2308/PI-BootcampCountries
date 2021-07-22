@@ -25,6 +25,7 @@
 .infoTitle{
     color: rgb(212, 212, 212);
     cursor: pointer;
+    text-decoration: none;
 }
 
 .img{

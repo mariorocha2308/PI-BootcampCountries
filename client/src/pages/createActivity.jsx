@@ -1,19 +1,109 @@
-const CreateActivity = () => {
-    return ( 
-        <div>
-            <div>
-                <h1>CREATE NEW ACTIVITY</h1>
-            </div>
-            <input type="text" placeholder="Name of activity"/>
-            <input type="text" placeholder="Difficult"/>
-            <input type="text" placeholder="Duration"/>
-            <input type="text" placeholder="Season"/>
+import React, { useEffect, useState } from 'react';
+import './styles/createTourism.css'
 
-            {/* TODO: CHECKBOX PARA ESCOGER PAISES EN <SIMULTANEO */}
-            
-            <button>
-                <h5>Create</h5>
-            </button>
+function post (input) {
+    fetch('http://localhost:3001/activity', {
+        method: 'POST',
+        body: JSON.stringify(input),
+        headers:{
+          'Content-Type': 'application/json'
+        }
+    })
+}
+const CreateActivity = () => {
+
+    const [input, setInput]= useState({
+        name:"",
+        duration: "",
+        season: "",
+        difficult: "",
+        codeCountry: [],
+    })
+
+    function handleTitle(e){setInput({...input, name:e.target.value})}
+    function handleDifficult(e){setInput({...input, difficult:e.target.value})}
+    function handleDuration(e){setInput({...input, duration:e.target.value})} 
+    function handleSeason(e){setInput({...input, season:e.target.value})} 
+    function handleCountries(e){setInput({...input, codeCountry:input.codeCountry.concat(e.target.value)})}
+    console.log(input);
+
+    function submitForm(e){
+        e.preventDefault()
+        post(input)
+        alert('Actividad Agregada')
+    }
+
+    const [state, setState] = useState([])
+
+    useEffect(() => {
+        fetch("http://localhost:3001/countries/extra/all")
+        .then( res => res.json() )
+        .then(data => setState(data))
+    },[])
+
+    return ( 
+        <div className='pageCreateTourism'>
+            <div className='navTourism'>
+                <h2 className='navTitle'>CREATE NEW TOURISM</h2>
+            </div>
+            <form onSubmit={submitForm} className='containerCreate' >
+                <div >
+                    <label className='titleCreate'>Title</label>
+                    <input type="text" placeholder="Title of activity"  onChange={handleTitle} value={input.name}/>
+                </div>
+                    <select onChange={handleDifficult} value={input.difficult} className='selectCreate'>
+                        <option value='default'>Select difficult</option>
+                        <option value="Baja">Baja</option>
+                        <option value="Media-Baja">Media-Baja</option>
+                        <option value="Media">Media</option>
+                        <option value="Media-Alta">Media-Alta</option>
+                        <option value="Alta">Alta</option>
+                        <option value="Extrema">Extrema</option>
+                    </select>
+               
+               
+                    <select onChange={handleDuration} value={input.duration} className='selectCreate'>
+                        <option value='default'>Select duration</option>
+                        <option value="1 hr aprox">1 hr aprox</option>
+                        <option value="2 hrs aprox">2 hrs aprox</option>
+                        <option value="4 hrs aprox">4 hrs aprox</option>
+                        <option value="6 hrs aprox">6 hrs aprox</option>
+                        <option value="8 hrs aprox">8 hrs aprox</option>
+                        <option value="10 hrs aprox">10 hrs aprox</option>
+                        <option value="Dias indefinidos">Dias indefinidos</option>
+                    </select>
+              
+                
+                    <select onChange={handleSeason} value={input.season} className='selectCreate'>
+                        <option value='default'>Select season</option>
+                        <option value='Summer'>Summer</option>
+                        <option value='Autumn'>Autumn</option>
+                        <option value='Winter'>Winter</option>
+                        <option value='Spring'>Spring</option>
+                    </select>
+                <div >
+                
+                <div className='scrollDiv'>
+                    {
+                    state.map((country) =>( 
+                        
+                        <div key={country.id}  onChange={handleCountries} value={input.codeCountry}className='listCreate'>
+                            <input type="checkbox" value={country.id} key={country.id} />
+                            {country.name}
+                        </div>
+                        
+                    ))
+                    } 
+                </div>
+
+                
+
+                    <button className='button'>
+                        Create
+                    </button>
+                </div>
+                
+            </form>        
 
         </div> 
     );
