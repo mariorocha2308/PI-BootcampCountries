@@ -4,12 +4,12 @@ import { findIdCountry} from '../actions/actions.js';
 import {useParams} from 'react-router-dom';
 import './styles/countryDetail.css'
 
-//TODO: Actividades turísticas con toda su información asociada
-//TODO: Área (Mostrarla en km2 o millones de km2)
-
 const DetailCountry = () => {
     const dispatch= useDispatch();
     const countryDetail= useSelector(state => state.countryDetail);
+
+    //*CONVIERTE EL AREA M2 A KM2
+    const km = countryDetail.area / 1000000
 
     const { id }= useParams();
 
@@ -31,16 +31,27 @@ const DetailCountry = () => {
                     <h3 className='continentDetail'>continent: {countryDetail.continent}</h3>
                     <h3 className='capitalDetail'>capital: {countryDetail.capital}</h3>
                     <h3 className='subregionDetail'>subregion: {countryDetail.subregion}</h3>
-                    <h3 className='areaDetail'>area: {countryDetail.area}</h3>
+                    <h3 className='areaDetail'>area: {km} km2</h3>
                     <h3 className='populationDetail'>population: {countryDetail.population}</h3>
                 </div>
                 
             </div>
+            
+            <h1 className='showActivity'>Tourism Activities</h1>
 
-
-            <div>
-                {/* //TODO: MAPEAR ACTIVIDADES TURISTICAS */}
-            </div>
+            { 
+                countryDetail.activities === undefined || countryDetail.activities.length === 0 ? <h2 className='loading'>There are not Activities Created</h2> : countryDetail.activities.map((activity) => (
+                    <div key={activity.id} className='cardActivity'>
+                        <h1 className='titleActivity'>{activity.name}</h1>
+                        <div className='containerActivity'>
+                            <h4 className='difficultActivity'>Difficult: {activity.difficult}</h4>
+                            <h4 className='durationActivity'>Duration: {activity.duration}</h4>
+                            <h4 className='seasonActivity'>Season: {activity.season}</h4>
+                        </div>
+                        
+                    </div>
+                ))
+            }
         </div>
     );
 }

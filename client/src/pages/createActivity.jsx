@@ -10,8 +10,10 @@ function post (input) {
         }
     })
 }
+
 const CreateActivity = () => {
 
+    //* LOGICA EL ESTADO DEL FORM 
     const [input, setInput]= useState({
         name:"",
         duration: "",
@@ -23,16 +25,46 @@ const CreateActivity = () => {
     function handleTitle(e){setInput({...input, name:e.target.value})}
     function handleDifficult(e){setInput({...input, difficult:e.target.value})}
     function handleDuration(e){setInput({...input, duration:e.target.value})} 
-    function handleSeason(e){setInput({...input, season:e.target.value})} 
+    function handleSeason(e){setInput({...input, season:e.target.value})}
     function handleCountries(e){setInput({...input, codeCountry:input.codeCountry.concat(e.target.value)})}
-    console.log(input);
 
     function submitForm(e){
         e.preventDefault()
-        post(input)
-        alert('Actividad Agregada')
+        
+            if (!input.name) {
+                alert('Title is required')
+            } else if(!input.difficult){
+                alert('Difficult is required')
+            } else if(!input.duration){
+                alert('Duration is required')
+            } else if(!input.season){
+                alert('Season is required')
+            } else if(input.codeCountry.length === 0){
+                alert('CodeCountry is required')
+            } else {
+                post(input)
+                stateReset()
+                alert('Actividad Agregada') 
+            }    
     }
 
+    
+    function stateReset(){
+        setInput({
+            name:"",
+            duration: "",
+            season: "",
+            difficult: "",
+            codeCountry: [],
+        })
+    }  
+    
+    function resetCodeCountry(e){
+        e.preventDefault()
+        setInput({...input, codeCountry:[]})
+    }
+
+    //* FETCH DEL BACK PARA LOS DATOS QUE USARA EL CHECKBOX
     const [state, setState] = useState([])
 
     useEffect(() => {
@@ -49,7 +81,7 @@ const CreateActivity = () => {
             <form onSubmit={submitForm} className='containerCreate' >
                 <div >
                     <label className='titleCreate'>Title</label>
-                    <input type="text" placeholder="Title of activity"  onChange={handleTitle} value={input.name}/>
+                    <input type="text" placeholder="Title of activity"  onChange={handleTitle} value={input.name}/>     
                 </div>
                     <select onChange={handleDifficult} value={input.difficult} className='selectCreate'>
                         <option value='default'>Select difficult</option>
@@ -60,8 +92,7 @@ const CreateActivity = () => {
                         <option value="Alta">Alta</option>
                         <option value="Extrema">Extrema</option>
                     </select>
-               
-               
+
                     <select onChange={handleDuration} value={input.duration} className='selectCreate'>
                         <option value='default'>Select duration</option>
                         <option value="1 hr aprox">1 hr aprox</option>
@@ -72,8 +103,7 @@ const CreateActivity = () => {
                         <option value="10 hrs aprox">10 hrs aprox</option>
                         <option value="Dias indefinidos">Dias indefinidos</option>
                     </select>
-              
-                
+
                     <select onChange={handleSeason} value={input.season} className='selectCreate'>
                         <option value='default'>Select season</option>
                         <option value='Summer'>Summer</option>
@@ -81,8 +111,11 @@ const CreateActivity = () => {
                         <option value='Winter'>Winter</option>
                         <option value='Spring'>Spring</option>
                     </select>
+
+                    <button className='btnClear' onClick={resetCodeCountry}>Clear Check</button>
+
                 <div >
-                
+
                 <div className='scrollDiv'>
                     {
                     state.map((country) =>( 
@@ -95,8 +128,6 @@ const CreateActivity = () => {
                     ))
                     } 
                 </div>
-
-                
 
                     <button className='button'>
                         Create

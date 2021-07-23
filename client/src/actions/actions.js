@@ -2,6 +2,7 @@ export const GET_ALL_COUNTRIES = "GET_ALL_COUNTRIES";
 export const GET_COUNTRY_DETAIL = 'GET_COUNTRY_DETAIL';
 export const NEXT_PAGE = "NEXT_PAGE"
 export const PREV_PAGE = "PREV_PAGE"
+export const GET_COUNTRY_NAME = "GET_COUNTRY_NAME"
 
 export const getAllCountries = () => {
     return async function(dispatch){
@@ -55,5 +56,18 @@ export function prevPage(num) {
             })
         })
     }
+}
+
+export function findNameCountry(name) {
+    return function (dispatch) {
+      return fetch(`http://localhost:3001/countries?name=${name}`)
+      .then(response => response.json())
+        .then(json => {
+          dispatch({
+              type: GET_COUNTRY_NAME, 
+              payload: json            
+          }); 
+       })
+     }
 }
 

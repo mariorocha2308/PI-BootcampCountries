@@ -30,8 +30,7 @@ const Home = () => {
       <div className="navBar">
         <label className="title">List Countries</label>
 
-        {/* //TODO: DESCOMENTAR ESTA ABAJO DE ESTO */}
-         {/* <div className="filterBar">
+         <div className="filterBar">
           <div className="filterBar">
           
             <select className='selectOption'>
@@ -50,7 +49,7 @@ const Home = () => {
           </div> 
        
           <input type="text" placeholder="Search" className='input'/>
-        </div>  */}
+        </div> 
       </div> 
       {
         result.map((country) => (

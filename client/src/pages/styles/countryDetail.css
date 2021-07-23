@@ -1,9 +1,3 @@
- /* .pageDetail{
-    display: flex;
-    flex-direction: column;
-    align-items: center; 
-} */
-
 .navBarDetail{
     color: white;
     background-color: #2f3542;
@@ -70,7 +64,59 @@
     margin: 0;
 }
 
-/* TODO: CREAR ESTILOS PARA EL DIV DE ACTIVIDADES TURISTICAS */
+.showActivity{
+    display: flex;
+    border-radius: 30px;
+    justify-content: center;
+    margin: auto;
+    margin-top: 30px;
+    background-color: #2f3542;
+    color: #fbc531;
+    width: 300px;
+    padding: 10px;
+}
+
+.loading{
+    color: #2f3542a8;
+    margin-top: 70px;
+}
+
+.cardActivity{
+    margin: 20px;
+    display: inline-block;
+    background-color: #2f3542;
+    width: 300px;
+    border-radius: 10px;
+}
+
+.titleActivity{
+    color: #487eb0;
+    margin: 0px;
+    margin-top: 5px;
+}
+.difficultActivity{
+    margin: 0px;
+    color: white;
+}
+
+.durationActivity{
+    margin: 0px;
+    color: white;
+}
+
+.seasonActivity{
+    margin: 0px;
+    color: white;
+}
+
+.containerActivity{
+    background-color: rgba(255, 255, 255, 0.089);
+    width: 250px;
+    border-radius: 10px;
+    margin: auto;
+    margin-top: 8px;
+    margin-bottom: 20px;
+}
 
 
 
