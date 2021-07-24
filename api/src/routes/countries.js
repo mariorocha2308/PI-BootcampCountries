@@ -15,7 +15,7 @@ router.get('/countries', async (req, res) => {
         //* Si no existe ningún país mostrar un mensaje adecuado
         const newName = name.charAt(0).toUpperCase() + name.slice(1).toLowerCase()
         
-        let find = await Country.findOne({where: {name: newName}})
+        let find = await Country.findAll({where: {name: newName}})
         if (find) {
             return res.json(find)
         } else{
