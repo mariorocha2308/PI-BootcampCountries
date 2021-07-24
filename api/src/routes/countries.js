@@ -13,17 +13,15 @@ router.get('/countries', async (req, res) => {
         
         //* Obtener los países que coincidan con el nombre pasado como query parameter (No necesariamente tiene que ser una matcheo exacto)
         //* Si no existe ningún país mostrar un mensaje adecuado
-
-        request(`https://restcountries.eu/rest/v2/name/${name}`, {json: true}, function(error, response, data){
-
-            if (name.charAt(0).toUpperCase() + name.slice(1).toLowerCase() === data[0].name) {
-                return res.status(200).json(data)
-            } else{
-                return res.status(404).send('PAIS NO ENCONTRADO')
-            }
-            
-        })   
+        const newName = name.charAt(0).toUpperCase() + name.slice(1).toLowerCase()
         
+        let find = await Country.findOne({where: {name: newName}})
+        if (find) {
+            return res.json(find)
+        } else{
+            return res.json({error: 'COUNTRY IS FAILED'})
+        }
+
     } else {
 
         request('https://restcountries.eu/rest/v2/all', { json: true }, function(error, response, data) {
@@ -49,7 +47,6 @@ router.get('/countries', async (req, res) => {
                 }
                 
             })
-                           
         });    
             
             try {
