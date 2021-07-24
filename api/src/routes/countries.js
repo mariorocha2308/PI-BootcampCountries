@@ -2,6 +2,7 @@ const { Router } = require('express');
 var request = require('request');
 const { Country, Activity } = require('../db.js');
 const router = require('express').Router();
+const {Op} = require('sequelize')
 
 //* En una primera instancia deberán traer todos los países desde restcountries y guardarlos en su propia base de datos y luego ya utilizarlos desde allí (Debe almacenar solo los datos necesarios para la ruta principal)
 //* Obtener un listado de los primeros 10 países
@@ -15,7 +16,10 @@ router.get('/countries', async (req, res) => {
         //* Si no existe ningún país mostrar un mensaje adecuado
         const newName = name.charAt(0).toUpperCase() + name.slice(1).toLowerCase()
         
-        let find = await Country.findAll({where: {name: newName}})
+        let find = await Country.findAll({where: {name: {
+            [Op.iLike]: `%${name}%`
+        }}})
+
         if (find) {
             return res.json(find)
         } else{
