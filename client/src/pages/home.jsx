@@ -5,13 +5,13 @@ import React, { useEffect } from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import { getAllCountries, nextPage, prevPage } from '../actions/actions.js';
 import { useHistory } from "react-router-dom";
-
+import SearchBar from './searchBar'
 
 const Home = () => {
 
   //* METODO DE REDIRECCION EN EL BOTON PARA IR A LA RUTA 
   const history = useHistory();
-  
+
   const handleRoute = () =>{ 
     history.push("/home/newActivity");
   }
@@ -20,6 +20,7 @@ const Home = () => {
   const dispatch = useDispatch();
   const result = useSelector(state => state.allCountries);
   const offset = useSelector(state => state.offset);
+  let resultCountry = result.slice(0, 10);
 
   useEffect(()=>{
     dispatch(getAllCountries())
@@ -29,30 +30,10 @@ const Home = () => {
     <div>
       <div className="navBar">
         <label className="title">List Countries</label>
-
-         <div className="filterBar">
-          <div className="filterBar">
-          
-            <select className='selectOption'>
-              <option defaulvalue>Order By</option>
-              <option value='asc'>ASC</option>
-              <option value='desc'>DESC</option>
-              <option value='population'>Population</option>
-            </select>
-
-            <select className='selectOption'>
-              <option defaulvalue>Filter By</option>
-              <option value='continent'>Continent</option>
-              <option value='tourism'>Tourism</option>
-            </select>
-
-          </div> 
-       
-          <input type="text" placeholder="Search" className='input'/>
-        </div> 
+        <SearchBar/>
       </div> 
       {
-        result.map((country) => (
+        resultCountry.map((country) => (
           <Country 
             key={country.id}
             name={country.name}

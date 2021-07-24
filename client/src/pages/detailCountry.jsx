@@ -40,7 +40,7 @@ const DetailCountry = () => {
             <h1 className='showActivity'>Tourism Activities</h1>
 
             { 
-                countryDetail.activities === undefined || countryDetail.activities.length === 0 ? <h2 className='loading'>There are not Activities Created</h2> : countryDetail.activities.map((activity) => (
+                countryDetail.activities === undefined || countryDetail.activities.length === 0 ? <h2 className='loading'>There Are Not Activities Created</h2> : countryDetail.activities.map((activity) => (
                     <div key={activity.id} className='cardActivity'>
                         <h1 className='titleActivity'>{activity.name}</h1>
                         <div className='containerActivity'>
