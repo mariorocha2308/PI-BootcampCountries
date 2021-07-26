@@ -1,9 +1,9 @@
 import "./styles/home.css";
 import Country from "./country.jsx";
 import { MdArrowBack, MdArrowForward } from "react-icons/md";  
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import { getAllCountries, nextPage, prevPage } from '../actions/actions.js';
+import { getAllCountries} from '../actions/actions.js';
 import { useHistory } from "react-router-dom";
 import SearchBar from './searchBar'
 
@@ -19,8 +19,17 @@ const Home = () => {
   //* DESPACHA LA ACCION GET_ALL_COUNTRIES
   const dispatch = useDispatch();
   const result = useSelector(state => state.allCountries);
-  const offset = useSelector(state => state.offset);
-  let resultCountry = result.slice(0, 10);
+
+  const [currentPage, setCurrentPage] = useState(0);
+  const dataResult = result.slice(currentPage, currentPage + 10);
+
+  const clickNextPage = () => {
+    setCurrentPage(currentPage + 10);
+  };
+  const clickPrevPage = () => {
+    if (currentPage > 0) setCurrentPage(currentPage - 10);
+  };
+
 
   useEffect(()=>{
     dispatch(getAllCountries())
@@ -33,7 +42,7 @@ const Home = () => {
         <SearchBar/>
       </div> 
       {
-        resultCountry.map((country) => (
+        dataResult.map((country) => (
           <Country 
             key={country.id}
             name={country.name}
@@ -44,16 +53,19 @@ const Home = () => {
         ))
       }
       <button className="float" onClick={handleRoute}>Create Activity</button>
-
-      {
-        offset <= 230 ? <h3 className="nextFloat">
-        <MdArrowForward onClick={() => dispatch(nextPage(10))}/>
+      
+      { 
+        currentPage < 240 ? <h3 className="nextFloat" onClick={clickNextPage}>
+        <MdArrowForward/>
         </h3> : null
       }
-        
-      <h3 className="beforeFloat">
-        <MdArrowBack onClick={() => dispatch(prevPage(10))}/>
-      </h3>
+      
+      { 
+        currentPage > 0 ? <h3 className="beforeFloat" onClick={clickPrevPage}>
+        <MdArrowBack/>
+        </h3> : null
+      }
+      
     </div>
   );
 };

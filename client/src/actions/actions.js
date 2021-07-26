@@ -1,8 +1,8 @@
 export const GET_ALL_COUNTRIES = "GET_ALL_COUNTRIES";
 export const GET_COUNTRY_DETAIL = 'GET_COUNTRY_DETAIL';
-export const NEXT_PAGE = "NEXT_PAGE"
-export const PREV_PAGE = "PREV_PAGE"
 export const GET_COUNTRY_NAME = "GET_COUNTRY_NAME"
+export const ORDER_BY = "ODER_BY";
+export const FILTER_BY = "FILTER_BY";
 
 export const getAllCountries = () => {
     return async function(dispatch){
@@ -21,41 +21,11 @@ export function findIdCountry(id) {
       .then(response => response.json())
         .then(json => {
           dispatch({
-              type: GET_COUNTRY_DETAIL, 
-              payload: json            
-          }); 
+              type: GET_COUNTRY_DETAIL,
+              payload: json
+          });
        })
      }
-}
-
-export function nextPage(num) {
-    return function (dispatch, getState) {
-        const {offset} = getState();
-        let next = offset + num 
-        return fetch(`http://localhost:3001/countries?offset=${next}`)
-        .then(response => response.json())
-        .then(json => {
-            dispatch({
-                type: NEXT_PAGE,
-                payload: {page: json, offset: next}
-            })
-        })
-    }
-}
-
-export function prevPage(num) {
-    return function (dispatch, getState) {
-        const {offset} = getState();
-        let prev = offset - num 
-        return fetch(`http://localhost:3001/countries?offset=${prev}`)
-        .then(response => response.json())
-        .then(json => {
-            dispatch({
-                type: PREV_PAGE,
-                payload: {page: json, offset: prev}
-            })
-        })
-    }
 }
 
 export function findNameCountry(name) {
@@ -64,10 +34,53 @@ export function findNameCountry(name) {
       .then(response => response.json())
         .then(json => {
           dispatch({
-              type: GET_COUNTRY_NAME, 
-              payload: json            
-          }); 
+              type: GET_COUNTRY_NAME,
+              payload: json
+          });
        })
      }
+}
+
+export function orderBy(value) {
+    return function (dispatch) {
+      return fetch(`http://localhost:3001/countries?order=${value}`)
+      .then(response => response.json())
+        .then(json => {
+          dispatch({
+              type: ORDER_BY,
+              payload: json
+          });
+       })
+     }
+}
+
+export function filterBy(continent, tourism){
+  return function (dispatch){
+    fetch('http://localhost:3001/countries/extra/all')
+    .then(response => response.json())
+    .then(data => {
+
+      let result = []
+
+      if (continent) {
+        result = data.filter(cont => cont.continent === continent)
+      }
+
+      dispatch({
+        type: FILTER_BY,
+        payload: result
+      })
+    })
+
+    
+
+    // let result = [];
+    // if (continent) {
+    //   result = data.map(country => {
+    //     country.filter(cont => cont.continent === continent)
+    //   })
+    // }
+    
+  }
 }
 

@@ -91,3 +91,14 @@
     background-color: #f6b93b;
 }
 
+.btnFilter{
+    background-color: #40739e;
+    border-radius: 5px;
+    border: none;
+    color: white;
+}
+
+.btnFilter:hover{
+    background-color: #578fbdea;
+    cursor: pointer;
+}
