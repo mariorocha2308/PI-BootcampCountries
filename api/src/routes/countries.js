@@ -8,13 +8,12 @@ const {Op} = require('sequelize')
 //* Obtener un listado de los primeros 10 países
 
 router.get('/countries', async (req, res) => {
-    const {name, offset} = req.query
+    const {name, order} = req.query
 
     if (name) {
         
         //* Obtener los países que coincidan con el nombre pasado como query parameter (No necesariamente tiene que ser una matcheo exacto)
         //* Si no existe ningún país mostrar un mensaje adecuado
-        const newName = name.charAt(0).toUpperCase() + name.slice(1).toLowerCase()
         
         let find = await Country.findAll({where: {name: {
             [Op.iLike]: `%${name}%`
@@ -26,6 +25,36 @@ router.get('/countries', async (req, res) => {
             return res.json({error: 'COUNTRY IS FAILED'})
         }
 
+    } else if(order){
+
+        switch (order) {
+            case 'ASC':
+                let orderASC = await Country.findAll({
+                    order: [['name', 'ASC']],
+                    include: [Activity]
+                })
+                return res.json(orderASC)
+            case 'DESC':
+                let orderDESC = await Country.findAll({
+                    order: [['name', 'DESC']],
+                    include: [Activity]
+                })
+                return res.json(orderDESC)
+            case 'population ASC':
+                let orderPopulationASC = await Country.findAll({
+                    order: [['population', 'ASC']],
+                    include: [Activity]
+                })        
+                return res.json(orderPopulationASC)
+            case 'population DESC':
+                let orderPopulationDESC = await Country.findAll({
+                    order: [['population', 'DESC']],
+                    include: [Activity]
+                })        
+                return res.json(orderPopulationDESC)
+            default: order
+                break;
+        }
     } else {
 
         request('https://restcountries.eu/rest/v2/all', { json: true }, function(error, response, data) {
@@ -54,7 +83,7 @@ router.get('/countries', async (req, res) => {
         });    
             
             try {
-                const limitCountries = await Country.findAll({limit:10, offset: offset})
+                const limitCountries = await Country.findAll()
                 return res.status(200).json(limitCountries)
             } catch (error) {
                 
@@ -88,13 +117,13 @@ router.get('/countries/:idPais', async(req, res) => {
 })
 
 router.get('/countries/extra/all', async (req, res) => {
-
     try {
-        const all = await Country.findAll()
-        res.status(200).json(all)
+        let extra = await Country.findAll()
+
+        res.json(extra)
     } catch (error) {
-        res.status(404).send('CARGA FALLIDA')
+        
     }
-    
 })
+
 module.exports = router;
