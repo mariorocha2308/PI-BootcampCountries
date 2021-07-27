@@ -118,7 +118,9 @@ router.get('/countries/:idPais', async(req, res) => {
 
 router.get('/countries/extra/all', async (req, res) => {
     try {
-        let extra = await Country.findAll()
+        let extra = await Country.findAll({
+            include:[Activity]
+        })
 
         res.json(extra)
     } catch (error) {
