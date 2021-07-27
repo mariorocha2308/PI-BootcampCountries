@@ -65,7 +65,7 @@ export function filterBy(continent, tourism){
       if (continent) {
         result = data.filter(cont => cont.continent === continent)
       } else if (tourism) {
-        result = data.filter(country => country.activities[0].filter(tour => tour.name === tourism))
+        result = data.filter(country => country.activities.some(tour => tour.name === tourism))
       }
 
       dispatch({
