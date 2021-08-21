@@ -27,6 +27,11 @@ La idea general es crear una aplicación en la cual se pueda ver información de
 
 #### Frontend
 
+- instalar paquetes requeridos: `npm install`
+- iniciar la pagina: `npm start`
+
 #### Backend
 
+- instalar paquetes requeridos: `npm install`
+- iniciar la pagina: `npm start`
 
