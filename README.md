@@ -30,7 +30,7 @@ La idea general es crear una aplicación en la cual se pueda ver información de
 - instalar paquetes requeridos: `npm install`
 - iniciar la pagina: `npm start`
 
- ![]()
+ ![](https://github.com/mariorocha2308/PI-BootcampCountries/blob/main/imgReadme/Captura%20web_20-8-2021_205028_localhost.jpeg)
 
 #### Backend
 
