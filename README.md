@@ -30,6 +30,8 @@ La idea general es crear una aplicación en la cual se pueda ver información de
 - instalar paquetes requeridos: `npm install`
 - iniciar la pagina: `npm start`
 
+ ![]()
+
 #### Backend
 
 - instalar paquetes requeridos: `npm install`
