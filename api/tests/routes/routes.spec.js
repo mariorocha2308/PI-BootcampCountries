@@ -6,7 +6,7 @@ const { Activity, conn } = require("../../src/db.js")
 
 const agent = session(app)
 
-xdescribe("Country routes", () => {
+describe("Country routes", () => {
   before(() =>
     conn.authenticate().catch((err) => {
       console.error("Unable to connect to the database:", err)
@@ -29,7 +29,7 @@ xdescribe("Country routes", () => {
 })
 
 
-xdescribe("Activity routes", () => {
+describe("Activity routes", () => {
   before(() =>
     conn.authenticate().catch((err) => {
       console.error("Unable to connect to the database:", err)

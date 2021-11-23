@@ -1,6 +1,6 @@
 const { Country, Activity, conn } = require('../../src/db.js');
 
-xdescribe('Country model', () => {
+describe('Country model', () => {
   before(() => conn.authenticate()
     .catch((err) => {
       console.error('Unable to connect to the database:', err);
@@ -71,7 +71,7 @@ xdescribe('Country model', () => {
 });
 
 
-xdescribe('Activity model', () => {
+describe('Activity model', () => {
   before(() => conn.authenticate()
     .catch((err) => {
       console.error('Unable to connect to the database:', err);

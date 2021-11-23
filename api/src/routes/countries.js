@@ -57,23 +57,22 @@ router.get('/countries', async (req, res) => {
         }
     } else {
 
-        request('https://restcountries.eu/rest/v2/all', { json: true }, function(error, response, data) {
+        request('https://restcountries.com/v3.1/all', { json: true }, function(error, response, data) {
             if (error) { res.status(404).send('CONSULTA FALLIDA'); }
-          
+
             data.map(async(country) => {
                 try {
                     await Country.findOrCreate({
                         where: {
-                            id: country.alpha3Code,
-                            name: country.name,
-                            imageFlag: country.flag,
+                            id: country.cca3,
+                            name: country.name.common,
+                            imageFlag: country.flags.svg,
                             continent: country.region,
-                            capital: country. capital,
+                            capital: country.capital[0],
                             subregion: country.subregion,
                             area: country.area,
                             population: country.population
                         }
-                        
                     })   
                 } catch (error) {
                     
