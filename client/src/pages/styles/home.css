@@ -1,16 +1,32 @@
-.navBar{
-    display: flex;
-    justify-content: space-between;
-    background-color: #2f3542;
-    padding: 5px;
+/* .container-fluid{
+    height: 35px;
+} */
+
+.toolbar__title{
+    color: #606060;
+    font-size: 20px;
+    font-weight: 500;
+    font-family: 'Poppins';
 }
 
-.title{
-    margin-left: 50px;
-    color: white;
-    font-size: 25px;
-    font-weight: 700;
+.searchbar{
+    display: flex;
+    align-items: center;
 }
+
+
+.selectOption{
+    border: none;
+    /* font-size: 30px; */
+    color: #FFF;
+    padding: 3px;
+    font-size: 15px;
+    margin-right: 10px;
+    background-color: #f6b93b;
+}
+
+
+
 
 /* BOTON FLOTANTE DE CREATE ACTIVITY */
 .float{
@@ -69,36 +85,5 @@
 
 .beforeFloat:hover{
     background-color: #f6b93b;
-    cursor: pointer;
-}
-
-
-/* INPUT Y FILTER STYLE */
-
-.filterBar{
-    display: flex;
-    justify-content: center;
-    margin-right: 20px;
-}
-
-.selectOption{
-    border: none;
-    /* font-size: 30px; */
-    color: #FFF;
-    padding: 3px;
-    font-size: 15px;
-    margin-right: 10px;
-    background-color: #f6b93b;
-}
-
-.btnFilter{
-    background-color: #40739e;
-    border-radius: 5px;
-    border: none;
-    color: white;
-}
-
-.btnFilter:hover{
-    background-color: #578fbdea;
     cursor: pointer;
 }

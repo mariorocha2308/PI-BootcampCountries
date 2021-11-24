@@ -10,16 +10,17 @@ const Main = () => {
     }
 
     return ( 
-        <div className='backImage'>
-            <div className='centerStack'>
-                <h1 className='titleMain'>Henry Countries</h1>
-
-                 <button
-                    onClick={handleRoute} className='btn'>
+        <div className='landing'>
+            <div className='landing-contain'>
+                <h1 className='landing__text'>Countries</h1>
+                <p className='landing__description'>
+                    Find, order countries & Create new tourism activities, Just try
+                </p>
+                <button
+                    onClick={handleRoute} className='btn btn-primary'>
                     Home
                 </button>
             </div>
-           
         </div>        
      );
 }

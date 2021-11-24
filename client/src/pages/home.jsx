@@ -36,11 +36,13 @@ const Home = () => {
   },[dispatch])
 
   return (
-    <div>
-      <div className="navBar">
-        <label className="title">List Countries</label>
-        <SearchBar/>
-      </div> 
+    <div className='home'>
+      <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+          <span className="toolbar__title">Home</span>
+          <SearchBar/>
+        </div>
+      </nav>
       {
         dataResult.map((country) => (
           <Country 

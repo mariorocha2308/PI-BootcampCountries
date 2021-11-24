@@ -1,37 +1,44 @@
-.backImage{
+.landing{
     display: flex;
     justify-content: center;
     align-items: center;
-    background: url('../images/brett-zeck-eyfMgGvo9PA-unsplash.jpg');
+    background: url('../images/world-map-unsplash.jpg');
     background-size: cover;
-    background-attachment: fixed;
     height: 100vh;
 }
 
-.centerStack {
-    background-color: rgba(51, 51, 51, 0.808);
-    padding: 150px;
-    border-top-left-radius: 200px;
-    border-bottom-right-radius: 200px;
-} 
-.titleMain{
-    margin-top: 0px;
-    color: rgba(255, 255, 0, 0.897);
-    font-size: 70px;
+.landing-contain{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
 }
 
-.btn{
-    border: none;
-    background-color: #4cd137;
+.landing__text{
+    display: flex;
+    justify-content: start;
+    margin-top: 0px;
+    color: #fdcb6e;
+    font-size: 90px;
+    font-weight: bold;
+    font-family: 'Poppins';
+}
+
+.landing__description{
+    display: flex;
+    align-self: flex-start;
+    text-align: start;
     color: white;
-    font-weight: 700;
-    font-size: 18px;
-    border-radius: 5px;
-    padding-top: 9px;
-    padding-bottom: 9px;
-    padding-left: 13px;
-    padding-right: 13px;
-} 
-.btn:hover{
-    background-color: #40739e;
-} 
+    font-family: 'Poppins';
+    font-size: 30px;
+    font-weight: 500;
+    width: 50%;
+}
+
+.btn-primary{
+    display: flex;
+    align-self: start;
+    justify-content: center;
+    width: 130px;
+    font-family: 'Poppins';
+    border: none;
+}

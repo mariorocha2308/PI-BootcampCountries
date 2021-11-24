@@ -3,6 +3,7 @@ import React, {useEffect, useState} from 'react';
 import { useDispatch } from 'react-redux';
 
 const SearchBar = () => {
+
     const dispatch = useDispatch()
 
     const[input, setInput]= useState({
@@ -35,14 +36,14 @@ const SearchBar = () => {
     function handleFilterTourism(e) {setInput({...input, tourism:e.target.value})}
 
     return ( 
-        <div className='filterBar'>
+        <div className='searchbar'>
             <div className='filterBar'>
                 <select className='selectOption' onChange={handleOrder} value={input.order}>
-                <option value=''>Order By</option>
-                <option value='ASC'>ASC</option>
-                <option value='DESC'>DESC</option>
-                <option value='population DESC'>Major Population</option>
-                <option value='population ASC'>Menor Population</option>
+                    <option value=''>Order By</option>
+                    <option value='ASC'>ASC</option>
+                    <option value='DESC'>DESC</option>
+                    <option value='population DESC'>Major Population</option>
+                    <option value='population ASC'>Menor Population</option>
                 </select>
                 
                 <select className='selectOption' onChange={handleFilterContinent} value={input.continent}>
@@ -66,7 +67,7 @@ const SearchBar = () => {
 
             </div> 
             
-            <input type="text" placeholder="Search" className='input' onChange={handleName} value={input.name}/>
+            <input type="text" placeholder="Search" onChange={handleName} value={input.name} className='search_input'/>
         </div>
      );
 }
