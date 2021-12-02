@@ -31,6 +31,15 @@ La idea general es crear una aplicación en la cual se pueda ver información de
 - iniciar la pagina: `npm start`
 
  ![](https://github.com/mariorocha2308/PI-BootcampCountries/blob/main/imgReadme/Captura%20web_20-8-2021_205028_localhost.jpeg)
+ ![](https://github.com/mariorocha2308/PI-BootcampCountries/blob/main/imgReadme/Captura%20web_20-8-2021_205041_localhost.jpeg)
+ ![](https://github.com/mariorocha2308/PI-BootcampCountries/blob/main/imgReadme/Captura%20web_20-8-2021_205133_localhost.jpeg)
+ ![](https://github.com/mariorocha2308/PI-BootcampCountries/blob/main/imgReadme/Captura%20web_20-8-2021_20519_localhost.jpeg)
+ ![](https://github.com/mariorocha2308/PI-BootcampCountries/blob/main/imgReadme/Captura%20web_20-8-2021_20521_localhost.jpeg)
+ ![](https://github.com/mariorocha2308/PI-BootcampCountries/blob/main/imgReadme/Captura%20web_20-8-2021_205232_localhost.jpeg)
+ ![](https://github.com/mariorocha2308/PI-BootcampCountries/blob/main/imgReadme/Captura%20web_20-8-2021_205257_localhost.jpeg)
+ ![](https://github.com/mariorocha2308/PI-BootcampCountries/blob/main/imgReadme/Captura%20web_20-8-2021_205343_localhost.jpeg)
+ ![](https://github.com/mariorocha2308/PI-BootcampCountries/blob/main/imgReadme/Captura%20web_20-8-2021_20568_localhost.jpeg)
+ 
 
 #### Backend
 
