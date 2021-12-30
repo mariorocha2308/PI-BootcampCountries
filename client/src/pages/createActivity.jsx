@@ -1,5 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './styles/createTourism.css'
+import { useSelector } from 'react-redux';
+import {useHistory} from 'react-router-dom'
+import {MdClose} from 'react-icons/md'
+import image from './images/alex-sever-unsplash.jpg'
 
 function post (input) {
     fetch('http://localhost:3001/activity', {
@@ -12,6 +16,14 @@ function post (input) {
 }
 
 const CreateActivity = () => {
+
+    const history = useHistory();
+
+    const handleRouteHome = () =>{ 
+      history.push("/home");
+    }
+
+    let state = useSelector(state => state.allCountries)
 
     //* LOGICA EL ESTADO DEL FORM 
     const [input, setInput]= useState({
@@ -45,6 +57,8 @@ const CreateActivity = () => {
                 post(input)
                 stateReset()
                 alert('Actividad Agregada') 
+                history.push("/home");
+
             }    
     }
 
@@ -59,30 +73,26 @@ const CreateActivity = () => {
         })
     }  
     
-    function resetCodeCountry(e){
-        e.preventDefault()
-        setInput({...input, codeCountry:[]})
-    }
-
-    //* FETCH DEL BACK PARA LOS DATOS QUE USARA EL CHECKBOX
-    const [state, setState] = useState([])
-
-    useEffect(() => {
-        fetch("http://localhost:3001/countries/extra/all")
-        .then( res => res.json() )
-        .then(data => setState(data))
-    },[])
+    // function resetCodeCountry(e){
+    //     e.preventDefault()
+    //     setInput({...input, codeCountry:[]})
+    // }
 
     return ( 
-        <div className='pageCreateTourism'>
-            <div className='navTourism'>
-                <h2 className='navTitle'>CREATE NEW TOURISM</h2>
+        <div className='create_activity'>
+            <div className='activityImg_content'>
+                <img src={image} alt="create img" className='image_activity'/>
             </div>
-            <form onSubmit={submitForm} className='containerCreate' >
-                <div >
-                    <label className='titleCreate'>Title</label>
-                    <input type="text" placeholder="Title of activity"  onChange={handleTitle} value={input.name}/>     
-                </div>
+            <div className='form__content'>
+                <div onClick={handleRouteHome} className='close__button'><MdClose/></div>
+                <label className='create__title'>Create activity</label>
+                <form onSubmit={submitForm} className='container_create' >
+                    <div >
+                        <label className='titleCreate'>Title</label>
+                        <input type="text" onChange={handleTitle} value={input.name}/>     
+                    </div>
+                    <div>
+
                     <select onChange={handleDifficult} value={input.difficult} className='selectCreate'>
                         <option value='default'>Select difficult</option>
                         <option value="Baja">Baja</option>
@@ -112,29 +122,28 @@ const CreateActivity = () => {
                         <option value='Spring'>Spring</option>
                     </select>
 
-                    <button className='btnClear' onClick={resetCodeCountry}>Clear Check</button>
+                    {/* <button className='btnClear' onClick={resetCodeCountry}>Clear Check</button> */}
 
-                <div >
-
-                <div className='scrollDiv'>
-                    {
-                    state.map((country) =>( 
+                    
+                    <select onChange={handleCountries} value={input.codeCountry}className='listCreate'>
+                        <option value="">Select Country</option>
+                        {
+                            state.map((country) =>( 
+                                <option value={country.id} key={country.id}>
+                                {country.name} </option>
                         
-                        <div key={country.id}  onChange={handleCountries} value={input.codeCountry}className='listCreate'>
-                            <input type="checkbox" value={country.id} key={country.id} />
-                            {country.name}
-                        </div>
-                        
-                    ))
-                    } 
-                </div>
+                            ))
+                        }
+                    </select>
+                    </div>
+                    
 
-                    <button className='button'>
+                
+                    <button className='activity_button'>
                         Create
                     </button>
-                </div>
-                
-            </form>        
+                </form>        
+            </div>
 
         </div> 
     );

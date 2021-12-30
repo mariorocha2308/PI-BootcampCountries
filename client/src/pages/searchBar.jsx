@@ -1,9 +1,11 @@
 import {findNameCountry, orderBy, filterBy} from '../actions/actions.js'
 import React, {useEffect, useState} from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import {FiSearch} from 'react-icons/fi'
 
 const SearchBar = () => {
 
+    let extra = useSelector(state => state.allCountries)
     const dispatch = useDispatch()
 
     const[input, setInput]= useState({
@@ -13,12 +15,7 @@ const SearchBar = () => {
         tourism: ""
     })
 
-    const [state, setState] = useState([])
-
     useEffect(()=>{
-        fetch("http://localhost:3001/countries/extra/all")
-        .then( res => res.json() )
-        .then(data => setState(data))
 
         if (input.name) {
             dispatch(findNameCountry(input.name))
@@ -27,23 +24,24 @@ const SearchBar = () => {
         } else if(input.continent || input.tourism) {
             dispatch(filterBy(input.continent, input.tourism))
         }
-        
-    },[input.name, input.order, input.continent, input.tourism])
+
+    },[ dispatch,input.name, input.order, input.continent, input.tourism])
 
     function handleName (e) {setInput({...input, name:e.target.value})}
-    function handleOrder(e) {setInput({...input, order:e.target.value})}
+    function handleOrder(e) {setInput({...input, order: e.target.value})}
     function handleFilterContinent(e) {setInput({...input, continent:e.target.value})}
     function handleFilterTourism(e) {setInput({...input, tourism:e.target.value})}
 
     return ( 
         <div className='searchbar'>
             <div className='filterBar'>
+                
                 <select className='selectOption' onChange={handleOrder} value={input.order}>
                     <option value=''>Order By</option>
                     <option value='ASC'>ASC</option>
                     <option value='DESC'>DESC</option>
-                    <option value='population DESC'>Major Population</option>
-                    <option value='population ASC'>Menor Population</option>
+                    <option value='Major Population'>Major Population</option>
+                    <option value='Menor Population'>Menor Population</option>
                 </select>
                 
                 <select className='selectOption' onChange={handleFilterContinent} value={input.continent}>
@@ -59,17 +57,19 @@ const SearchBar = () => {
                 <select className='selectOption' onChange={handleFilterTourism} value={input.tourism}>
                     <option value="">Filter By Tourism</option>
                     {
-                        state.map((country) => country.activities.map(activity => (
+                        extra.map((country) => country.activities?.map(activity => (
                             <option value={activity.name}>{activity.name}</option>
                         )))
                     }
                 </select>
 
             </div> 
-            
-            <input type="text" placeholder="Search" onChange={handleName} value={input.name} className='search_input'/>
+            <div className='search_content'>
+                <FiSearch className='search__icon'/>
+                <input type="text" placeholder="Search..." onChange={handleName} value={input.name} className='search__input'/>
+            </div>
         </div>
-     );
+    );
 }
- 
+
 export default SearchBar;
