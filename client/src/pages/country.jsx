@@ -1,13 +1,19 @@
 import './styles/country.css'
-import { Link } from 'react-router-dom'
-
+import { NavLink } from 'react-router-dom'
+import { CgArrowLongRight } from "react-icons/cg";
+import {MdLabel} from 'react-icons/md' 
+import {BiWorld} from 'react-icons/bi'
 const Country = (props) => {
     return ( 
         <div className='card'>
-            <img src={props.image} alt={props.name} className='img'/>
-            <h2 className='titleCard'>{props.name}</h2>
-            <h4 className='continentTitle'>Continent: {props.region}</h4>
-            <Link to={`/home/countries/${props.id}`} className='infoTitle' ><h5 >Show more</h5></Link>
+            <div className='image_content'>
+                <img src={props.image} alt={props.name} className='card__image'/>
+            </div>
+            <label className='card__title'><MdLabel/> {props.name}</label>
+            <label className='card__continent'><BiWorld/> {props.region}</label>
+            <div className='detail_content'>
+                <NavLink to={`/home/countries/${props.id}`} className='card__more' >view detail <CgArrowLongRight/></NavLink>
+            </div>
         </div> 
     );
 }

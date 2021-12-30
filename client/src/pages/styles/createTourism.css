@@ -1,108 +1,68 @@
-.pageCreateTourism{
-    background-color: #34495e;
+.create_activity{
+    display: flex;
+    justify-content: space-between;
+    background-color: white;
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+}
+
+.activityImg_content{
+    width: 50%;
     height: 100vh;
 }
 
-.navTourism{
-    color: white;
-    background-color: #2f3542;
-    padding: 8px;
+.image_activity{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(80%);
 }
 
-.navTitle{
-    margin: 0;
-}
-
-.containerCreate{
-    border-radius: 30px;
-    margin-left: 120px;
-    padding: 10px;
-    background-color: #ecf0f1;
-    margin-top: 30px;
-    height: 570px;
-    width: 900px;
-}
-
-.button{
-    margin-top: 30px;
-    background-color: #e1b12c;
-    border: none;
-    padding: 12px;
-    border-radius: 5px;
-    color: #ecf0f1;
-    cursor: pointer;
-}
-
-.button:hover{
-    background-color: #cca331;
-}
-
-.selectCreate{
-    margin-top: 9px;
-    border: none;
-    padding: 8px;
-    color: #ecf0f1;
-    border-radius: 4px;
-    font-size: 15px;
-    font-weight: bold;
-    background-color: cadetblue;
-    margin-right: 15px;
-}
-
-.titleCreate{
+.form__content{
     display: flex;
     flex-direction: column;
-    font-size: 17px;
-    font-weight: bold;
-}
+    position: relative;
+    padding-top: 70px;
+    justify-content: center;
+    width: 50%;
+    padding: 20px;
 
-.input{
-    width: 200px;
-    border: none;
-    padding: 4px;
-    margin: auto;
-    font-size: 14px;
 }
-
-option{
-    font-size: 15px;
-}
-
-.listCreate{
-    display: inline-block;
-    margin: 5px;
-    background-color: #34495e;
-    border-radius: 30px;
-    padding: 5px;
-    color: white;
-    font-weight: 500;
-}
-
-.scrollDiv{
-    margin-top: 8px;
-    overflow-y: scroll;
-    height: 400px;
-}
-
-.warning{
-    display: block;
-    margin: 0px;
-    color: rgba(255, 0, 0, 0.89);
-    font-weight: 500;
-    font-size: 14px;
-    margin-top: 5px;
-}
-
-.btnClear{
-    background-color: #4cd137;
-    padding: 6px;
-    border-radius: 5px;
-    border: none;
-    color: white;
-    margin-left: 50px;
-}
-
-.btnClear:hover{
-    background-color: #59d846e3;
+.close__button{
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 25px;
+    color: gray;
     cursor: pointer;
+}
+
+.create__title{
+    font-family: 'Poppins';
+    color: gray;
+    font-size: 50px;
+    font-weight: bold;
+    align-self: flex-start;
+}
+
+.container_create{
+    display: flex;
+    flex-direction: column;
+}
+
+.activity_button{
+    border: none;
+    background-color: #6c5ce7;
+    border-radius: 3px;
+    color: white;
+    padding: 6px;
+    width: 130px;
+    font-size: 18px;
+    font-family: 'Poppins';
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px;
+    
+}
+.activity_button:active{
+    transform: scale(.9);
 }

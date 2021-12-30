@@ -56,16 +56,24 @@ export function orderBy(value) {
 
 export function filterBy(continent, tourism){
   return function (dispatch){
-    fetch('http://localhost:3001/countries/extra/all')
+    fetch('http://localhost:3001/countries')
     .then(response => response.json())
     .then(data => {
 
-      let result = []
+      let result = [];
 
       if (continent) {
-        result = data.filter(cont => cont.continent === continent)
+        if (continent === "") {
+          result = data
+        } else{
+          result = data.filter(cont => cont.continent === continent)
+        }
       } else if (tourism) {
-        result = data.filter(country => country.activities.some(tour => tour.name === tourism))
+        if (tourism === "") {
+          result = data
+        } else {
+          result = data.filter(country => country.activities.some(tour => tour.name === tourism))
+        }
       }
 
       dispatch({
