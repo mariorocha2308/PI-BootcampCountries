@@ -1,81 +1,17 @@
-.home{
-    position: relative;
-}
-
-.countries_content{
-    margin-top: 7px;
-    padding-top: 13px;
-    margin-right: 5px;
-    height: 93vh;
+.countries_grid{
     display: grid;
     grid-template-columns: 25% 25% 25% 25%;
-    grid-template-rows: 45% 45% 45%;
     justify-items: center;
-    overflow-y: scroll;
-}
-
-
-/* BOTON FLOTANTE DE CREATE ACTIVITY */
-.float{
-	position: absolute;
-	bottom: 30px;
-	right:40px;
-	background-color:#40739e;
-	color:#FFF;
-	border-radius: 15px;
-    padding: 10px;
-	text-align:center;
-    font-weight: bold;
-    font-size: 18px;
-    border: none;
-}
-
-.float:hover{
-    background-color: #44bd32;
-    cursor: pointer;
-}
-
-/* BOTON DE NEXT PAGE */
-.nextFloat{
-    display: flex;
-    position: absolute;
-	bottom: 5px;
-	right: 200px;
-    width: 40px;
-    height: 40px;
-	background-color:#778beb;
-	color:#FFF;
-	border-radius: 100px;
-    justify-content: center;
     align-items: center;
-    user-select: none;
-    cursor: pointer;
+    row-gap: 20px;
+    padding-top: 5rem;
+    padding-bottom: 40px;
 }
 
-.nextFloat:active{
-    transform: scale(.9);
-}
-
-/* BOTON DE BACK PAGE  */
-.beforeFloat{
-    display: flex;
-	position: absolute;
-	bottom: 5px;
-	right: 250px;
-    width: 40px;
-    height: 40px;
-	background-color: #778beb;
-	color:#FFF;
-	border-radius: 50px;
-    border: none;
-    justify-content: center;
-    align-items: center;
-    user-select: none;
-    cursor: pointer;
-}
-
-.beforeFloat:active{
-    transform: scale(.9);
+.notFound{
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+    width: 450px
 }
 
 /* PERSONALIZACION DEL SCROOLBAR */
@@ -92,3 +28,4 @@
     background: #4F4537;
     border-radius: 5px;
 }
+

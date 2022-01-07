@@ -1,28 +1,18 @@
 .create_activity{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     background-color: white;
-    height: 100vh;
-    width: 100vw;
-    position: relative;
-}
-
-.activityImg_content{
-    width: 50%;
-    height: 100vh;
-}
-
-.image_activity{
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: brightness(80%);
+    height: 90vh;
+}
+
+.image-create{
+    width: 40%;
 }
 
 .form__content{
     display: flex;
     flex-direction: column;
-    position: relative;
     padding-top: 70px;
     justify-content: center;
     width: 50%;
@@ -54,7 +44,7 @@
 .activity_button{
     border: none;
     background-color: #6c5ce7;
-    border-radius: 3px;
+    border-radius: 20px;
     color: white;
     padding: 6px;
     width: 130px;

@@ -1,8 +1,7 @@
 import React from 'react'
 import {useHistory} from 'react-router-dom'
 import './styles/navbar.css'
-import { Image } from 'semantic-ui-react'
-import avatar from './images/IMG-20211030-WA0022.jpg'
+import { Button, Icon } from 'semantic-ui-react'
 
 const Navbar = () => {
 
@@ -11,15 +10,17 @@ const Navbar = () => {
     const navigateHome = () =>{ 
         history.push("/");
     }
+    const sendLinkedin = () => {
+        window.location.href='https://www.linkedin.com/in/mario-de-jesus-rocha/'
+    } 
 
     return ( 
         <div className='nav'>
             <div className='nav_content'>
-                <span className="nav__title" onClick={navigateHome}>PI-Countries</span>
-                <div className='nav__avatar'>
-                    <Image src={avatar} avatar size='mini'/>
-                    <span className='nav__title-avatar'>Mario Rocha</span>
-                </div>
+                <span className="nav__title-content" onClick={navigateHome}>PI-Countries</span>
+                <Button color='linkedin' onClick={sendLinkedin}>
+                    <Icon name='linkedin'/> Mario Rocha
+                </Button>
             </div>
         </div>
     );

@@ -19,10 +19,6 @@ const DetailCountry = () => {
 
     return ( 
         <div className='pageDetail'>
-            <div className="navBarDetail">
-                <h2 className='navTitle'>DETAIL COUNTRY</h2>
-            </div> 
-                       
             <div className='countryDetail'>
                 <img className='imgDetail' src={countryDetail.imageFlag} alt={countryDetail.name}/>
                 <div>

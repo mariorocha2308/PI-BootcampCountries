@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import './styles/createTourism.css'
 import { useSelector } from 'react-redux';
 import {useHistory} from 'react-router-dom'
-import {MdClose} from 'react-icons/md'
-import image from './images/alex-sever-unsplash.jpg'
+import image from './images/undraw_eiffel_tower_-3-gw8.svg'
 
 function post (input) {
     fetch('http://localhost:3001/activity', {
@@ -18,10 +17,6 @@ function post (input) {
 const CreateActivity = () => {
 
     const history = useHistory();
-
-    const handleRouteHome = () =>{ 
-      history.push("/home");
-    }
 
     let state = useSelector(state => state.allCountries)
 
@@ -57,8 +52,7 @@ const CreateActivity = () => {
                 post(input)
                 stateReset()
                 alert('Actividad Agregada') 
-                history.push("/home");
-
+                history.push("/");
             }    
     }
 
@@ -71,20 +65,11 @@ const CreateActivity = () => {
             difficult: "",
             codeCountry: [],
         })
-    }  
-    
-    // function resetCodeCountry(e){
-    //     e.preventDefault()
-    //     setInput({...input, codeCountry:[]})
-    // }
+    }
 
     return ( 
         <div className='create_activity'>
-            <div className='activityImg_content'>
-                <img src={image} alt="create img" className='image_activity'/>
-            </div>
             <div className='form__content'>
-                <div onClick={handleRouteHome} className='close__button'><MdClose/></div>
                 <label className='create__title'>Create activity</label>
                 <form onSubmit={submitForm} className='container_create' >
                     <div >
@@ -121,9 +106,6 @@ const CreateActivity = () => {
                         <option value='Winter'>Winter</option>
                         <option value='Spring'>Spring</option>
                     </select>
-
-                    {/* <button className='btnClear' onClick={resetCodeCountry}>Clear Check</button> */}
-
                     
                     <select onChange={handleCountries} value={input.codeCountry}className='listCreate'>
                         <option value="">Select Country</option>
@@ -136,14 +118,13 @@ const CreateActivity = () => {
                         }
                     </select>
                     </div>
-                    
 
-                
                     <button className='activity_button'>
                         Create
                     </button>
                 </form>        
             </div>
+            <img src={image} alt="" className='image-create'/>
 
         </div> 
     );

@@ -40,13 +40,13 @@ router.get('/countries', async (req, res) => {
                     include: [Activity]
                 })
                 return res.json(orderDESC)
-            case 'population ASC':
+            case 'Menor Population':
                 let orderPopulationASC = await Country.findAll({
                     order: [['population', 'ASC']],
                     include: [Activity]
                 })        
                 return res.json(orderPopulationASC)
-            case 'population DESC':
+            case 'Major Population':
                 let orderPopulationDESC = await Country.findAll({
                     order: [['population', 'DESC']],
                     include: [Activity]

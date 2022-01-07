@@ -2,7 +2,7 @@
     display: flex;
     width: 100%;
     justify-content: center;
-    margin-top: 10px;
+    padding-top: 10px;
 }
 
 .nav_content{
@@ -13,7 +13,7 @@
     height: 8vh;
 }
 
-.nav__title{
+.nav__title-content{
     color: #616161;
     font-size: 23px;
     font-weight: bold;
@@ -43,43 +43,4 @@
     font-family: 'Poppins';
     font-weight: bold;
     color: rgb(88, 88, 88);
-}
-
-/* ESTILOS DEL SEARCHBAR */
-.searchbar{
-    display: flex;
-    align-items: center;
-}
-
-.search_content{
-    display: flex;
-    align-items: center;
-    background-color: rgb(243, 243, 243);
-    width: 150px;
-    border-radius: 3px;
-    padding-left: 10px;
-    flex-direction: row-reverse;
-}
-
-.filterBar{
-    display: flex;
-    align-items: center;
-}
-.search__icon{
-    color: rgb(44, 44, 44);
-    margin-right: 10px;
-}
-
-.search__input{
-    border: none;
-    background-color: transparent;
-    outline: none;
-    width: 60%;
-    color: black;
-    font-family: 'Poppins';
-}
-
-.search__input::placeholder {
-    color: black;
-    font-size: 15px;
 }

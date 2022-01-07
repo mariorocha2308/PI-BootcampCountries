@@ -1,0 +1,77 @@
+.searchbar{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+}
+
+.search_content{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(255, 255, 255);
+    padding: 7px;
+    width: 50%;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    border-radius: 3px;
+    padding-left: 20px;
+}
+
+.search__icon-content{
+    color: rgb(105, 105, 105);
+    margin-right: 6px;
+}
+
+.search__input-content{
+    border: none;
+    outline: none;
+    font-family: 'Poppins';
+    font-weight: bold;
+    color: rgb(121, 121, 121);
+}
+
+.search__input-content::placeholder{
+    color: rgb(173, 173, 173);
+}
+
+
+.search__button-content{
+    border: none;
+    background-color: #6c5ce773;
+    color: #6c5ce7;
+    font-family: 'Poppins';
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.filterBar{
+    display: flex;
+    flex-direction: row;
+}
+
+.category_content{
+    margin-top: 2rem;
+}
+
+.category__item{
+    background-color: white;
+    padding: 10px;
+    width: 6rem;
+    margin-right: 2rem;
+    border-radius: 6px;
+    color: rgb(100, 100, 100);
+    font-family: 'Poppins';
+    font-weight: bold;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    cursor: pointer
+
+}
+
+.selectStyle{
+    width: 150px;
+    margin-top: 2rem;
+    margin-right: 1rem;
+}
