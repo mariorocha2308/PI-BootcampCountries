@@ -1,15 +1,15 @@
-import {findNameCountry, orderBy, filterBy, getAllCountries} from '../actions/actions.js'
+import {findNameCountry, orderBy, getAllCountries} from '../actions/actions.js'
 import React, {useEffect, useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {FaSearch} from 'react-icons/fa'
 import {NavLink} from 'react-router-dom'
 import './styles/searchBar.css'
-import { Button, Icon } from 'semantic-ui-react'
+import { Button, Icon, Popup } from 'semantic-ui-react'
 import Select from 'react-select'
 
-const SearchBar = () => {
+const SearchBar = ({setCurrentPage}) => {
     
-    let extra = useSelector(state => state.allCountries)
+    const extra = useSelector(state => state.allCountries)
     const dispatch = useDispatch()
     
     const[input, setInput]= useState({
@@ -19,31 +19,36 @@ const SearchBar = () => {
         tourism: ""
     })
 
-        
     function handleInput (e) {setInput({...input.name, name: e.target.value})}
 
     useEffect(()=>{
 
         if (input.name) {
+            setCurrentPage(1)
             dispatch(findNameCountry(input.name))
-        } else if (input.order){
-            dispatch(orderBy(input.order))
-        } else if(input.continent || input.tourism) {
-            dispatch(filterBy(input.continent, input.tourism))
-        } else{
+        } else {
+            setCurrentPage(1)
             dispatch(getAllCountries())
         }
+        
+        if(input.continent || input.order || input.tourism) {
+            setCurrentPage(1)
+            dispatch(orderBy(input.continent, input.order, input.tourism))
+        }else{
+            setCurrentPage(1)
+            dispatch(orderBy(input.continent, input.order, input.tourism))
+        }
 
-    },[ dispatch,input.name, input.order, input.continent, input.tourism])
+    },[ dispatch,input.name, input.order, input.continent, input.tourism, setCurrentPage])
 
     // VALUES FOR REACT SELECT
 
     const optionOrder = [
         {value: '', label: 'All Order'},
-        {value: 'ASC', label: 'Ascendente'},
-        {value: 'DESC', label: 'Descendente'},
-        {value: 'Major Population', label: 'Major Population'},
-        {value: 'Menor Population', label: 'Menor Population'}
+        {value: 'name ASC', label: 'Ascendente'},
+        {value: 'name DESC', label: 'Descendente'},
+        {value: 'population DESC', label: 'Major Population'},
+        {value: 'population ASC', label: 'Menor Population'}
     ]
 
     const optionFilterContinent = [
@@ -56,21 +61,24 @@ const SearchBar = () => {
         {value: 'Polar', label: 'Polar'}
     ]
 
-    const defaultFilterTourism = [
+    let optionsTourism = [
         {value: '', label: 'All Tourism'}
     ]
-    let optionsTourism = extra.activities?.map(function (activity) {
-        return { value: activity.name, label: activity.name };
+    
+    extra?.map((country) => {
+        return country.activities?.map(activity => {
+            return optionsTourism.push({ value: activity.name, label: activity.name })
+        })
     })
 
     const selectContinent = (selectedOption) => {
-        setInput({...input.continent, continent: selectedOption.value })
+        setInput({...input, continent: selectedOption.value })
     }
     const selectOrder = (selectedOption) => {
-        setInput({...input.order, order: selectedOption.value })
+        setInput({...input, order: selectedOption.value })
     }
     const selectTourism = (selectedOption) => {
-        setInput({...input.tourism, tourism: selectedOption.value })
+        setInput({...input, tourism: selectedOption.value })
     }
 
     return ( 
@@ -94,7 +102,8 @@ const SearchBar = () => {
                     onChange={selectContinent}
                     name="continent"
                     options={optionFilterContinent}
-                    />
+                    isDisabled={input.tourism}
+                />
 
                 <Select
                     className='selectStyle'
@@ -102,15 +111,16 @@ const SearchBar = () => {
                     onChange={selectOrder}
                     name="order"
                     options={optionOrder}
-                    />
+                />
+
                 <Select
                     className='selectStyle'
-                    defaultValue={defaultFilterTourism[0]}
+                    defaultValue={optionsTourism[0]}
                     onChange={selectTourism}
                     name='tourism'
-                    options={optionsTourism}
-                    />
-
+                    options={optionsTourism.filter((current,index,options)=>options.findIndex(tourism=>(tourism.value===current.value))===index)}
+                    isDisabled={input.continent}
+                />
             </div> 
         </div>
     );

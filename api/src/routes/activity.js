@@ -40,5 +40,23 @@ router.post('/activity', async (req, res) => {
     
 })
 
+router.delete('/delete/activity/:id', async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const tourism = await Activity.findOne({
+            where: {id}
+        })
+
+        if (tourism) {
+            await tourism.destroy();
+            res.status(200).send({ message: "Activity deleted successfully" });
+        } else {
+            res.status(400).send({ message: "Activity not exist" });
+        }
+    } catch (error) {
+    }
+})
+
 
 module.exports = router;

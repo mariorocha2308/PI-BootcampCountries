@@ -4,6 +4,7 @@ const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('country', {
+    // charset: 'utf8mb4',
     id: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -39,6 +40,15 @@ module.exports = (sequelize) => {
 
     population: {      
       type: DataTypes.BIGINT,
-    }
+    },
+
+    //* NEW DATA
+    timezones: {
+      type: DataTypes.STRING
+    },
+
+    languages: {
+      type: DataTypes.ARRAY(DataTypes.STRING)
+    },
   });
 };

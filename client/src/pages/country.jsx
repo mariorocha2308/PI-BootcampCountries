@@ -6,13 +6,13 @@ const Country = (props) => {
     return (
         <NavLink to={`/home/countries/${props.id}`}>
             <div className='card'>
-                <div className='image_content'>
-                    <img src={props.image} alt={props.name} className='card__image'/>
-                </div>
-                <label className='card__title'>{props.name}</label>
-                <div className='card__continent'>
-                    <BsGeoAltFill/>
-                    <label>{props.region}</label>
+                <img src={props.image} alt={props.name} className='card__image'/>
+                <div className='overlay'>
+                    <label className='card__title'>{props.name}</label> 
+                    <div className='card__continent'>
+                        <BsGeoAltFill/>
+                        <label>{props.region}</label>
+                    </div>
                 </div>
             </div>
         </NavLink> 
