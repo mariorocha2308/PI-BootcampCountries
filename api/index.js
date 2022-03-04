@@ -23,6 +23,7 @@ const request = require('request');
 const { Country } = require('./src/db');
 const PORT = process.env.PORT || 3001
 
+
 conn.sync({ force: false }).then(() => {
   server.listen(PORT, () => {
     request('https://restcountries.com/v3.1/all', { json: true }, function(error, response, data) {
