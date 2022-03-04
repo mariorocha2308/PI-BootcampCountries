@@ -25,7 +25,6 @@ let sequelize =
           min: 1,
           idle: 10000,
         },
-
         dialectOptions: {
           ssl: {
             require: true,
@@ -41,7 +40,7 @@ let sequelize =
         { logging: false, native: false }
       );
 
-      
+
 const basename = path.basename(__filename);
 
 const modelDefiners = [];
