@@ -25,6 +25,7 @@ let sequelize =
           min: 1,
           idle: 10000,
         },
+        
         dialectOptions: {
           ssl: {
             require: true,
