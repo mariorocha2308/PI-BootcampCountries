@@ -21,11 +21,10 @@ const server = require('./src/app.js');
 const { conn } = require('./src/db.js');
 const request = require('request');
 const { Country } = require('./src/db');
-const PORT = process.env.PORT || 3001
 
 
 conn.sync({ force: false }).then(() => {
-  server.listen(PORT, () => {
+  server.listen(process.env.PORT || 3001, () => {
     request('https://restcountries.com/v3.1/all', { json: true }, function(error, response, data) {
       if (error) { res.status(404).send('CONSULTA FALLIDA'); }
       data.map(async(country) => {
