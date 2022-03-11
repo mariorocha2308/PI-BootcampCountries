@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {FaSearch} from 'react-icons/fa'
 import {NavLink} from 'react-router-dom'
 import './styles/searchBar.css'
-import { Button, Icon, Popup } from 'semantic-ui-react'
+import { Button, Icon } from 'semantic-ui-react'
 import Select from 'react-select'
 
 const SearchBar = ({setCurrentPage}) => {
@@ -57,8 +57,7 @@ const SearchBar = ({setCurrentPage}) => {
         {value: 'Americas', label: 'Americas'},
         {value: 'Asia', label: 'Asia'},
         {value: 'Africa', label: 'Africa'},
-        {value: 'Oceania', label: 'Oceania'},
-        {value: 'Polar', label: 'Polar'}
+        {value: 'Oceania', label: 'Oceania'}
     ]
 
     let optionsTourism = [

@@ -6,9 +6,10 @@ import Select from 'react-select'
 import { getAllCountries} from '../actions/actions.js';
 import { Form, Input, Message, Button } from 'semantic-ui-react'
 import makeAnimated from 'react-select/animated';
+const URL_DEPLOY = process.env.REACT_APP_DEPLOY
 
 function post (input) {
-    fetch('http://localhost:3001/activity', {
+    fetch(`${URL_DEPLOY}/activity`, {
         method: 'POST',
         body: JSON.stringify(input),
         headers:{
@@ -103,7 +104,6 @@ const CreateActivity = () => {
     return ( 
         <div className='create_activity'>
             <div className='form__content'>
-                <label className='create__title'>Create activity</label>
                 <Form onSubmit={submitForm} >
                     <Form.Field
                         id='form-input-control-first-name'
@@ -114,6 +114,7 @@ const CreateActivity = () => {
 
                     <div className='selects'>
                         <Select
+                            className='responsive'
                             onChange={handleDifficult} 
                             name='difficult'
                             defaultValue={optionDifficult[0]}
@@ -123,11 +124,13 @@ const CreateActivity = () => {
                         <Select 
                             onChange={handleDuration} 
                             name='duration'
+                            className='responsive'
                             defaultValue={optionDuration[0]}
                             options={optionDuration}
                             />
 
                         <Select
+                            className='responsive'
                             onChange={handleSeason} 
                             name='season' 
                             defaultValue={optionSeason[0]}

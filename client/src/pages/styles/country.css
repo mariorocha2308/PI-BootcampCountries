@@ -57,3 +57,10 @@
     cursor: pointer;
     font-weight: 700;
 }
+
+@media (max-width: 576px) {
+    .card {
+        width: 380px;
+        height: 200px
+    }
+}

@@ -108,6 +108,7 @@ export default function rootReducer(state = initialState, action){
                         sendOrderAndFilter = firstFilterContPD.sort((a,b) => {
                             return b.population - a.population
                         })
+                        break;
                         
                     default: 
                     break;
@@ -151,6 +152,7 @@ export default function rootReducer(state = initialState, action){
                         sendOrderAndFilter = firstFilterTourPD.sort((a,b) => {
                             return b.population - a.population
                         })
+                        break;
                         
                     default: 
                     break;

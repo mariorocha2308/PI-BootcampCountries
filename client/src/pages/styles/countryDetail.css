@@ -1,65 +1,61 @@
 .pageDetail {
     display: flex;
     width: 100%;
-    height: 90vh;
+    height: 89.7vh;
+    max-width: 1200px;
+    margin: 0 auto;
+    justify-content: center;
 }
 
-.countryDetail{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+
+
+.pageDetail--content{
     height: 100%;
-    width: 100%
+    width: 90%;
+    padding-top: 3rem;
+}
+
+
+.details {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 50%
 }
 
 .details--info {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 34%;
+    width: 35%;
     height: 100%;
-    padding: 2rem;
-    box-sizing: border-box;
-    overflow-y: scroll;
 }
 
-.name--time {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%
+.slider{
+    width: 60%;
+    align-self: center;
 }
 
 .nameDetail{
-    color: rgb(65, 65, 65);
+    display: flex;
+    color: rgb(78, 78, 78);
     margin: 0;
-    font-size: 23px;
+    font-size: 26px;
     font-family: 'Poppins';
     font-weight: bold;
     align-self: flex-start;
 }
 
-.timezone {
-    color: #70a1ff;
-    font-size: 14px;
-    font-family: 'Poppins';
-    font-weight: bold;
-}
-
 .capitalDetail {
-    color: #ff4757;
+    color: #b6bbc0 ;
     font-family: 'Poppins';
     font-weight: 600;
     font-size: 16px;
-    margin-top: 0.5rem;
+    margin-top: 0.3rem;
     align-self: flex-start;
     padding-bottom: 2rem;
 }
 
-hr {
-    width: 100%;               
-    background-color: rgb(179, 179, 179);
-}
 
 .detail--maps {
     align-self: flex-start;
@@ -68,10 +64,21 @@ hr {
     font-weight: 600;
     font-size: 15px;
     padding-bottom: 2px;
+    text-transform: capitalize;
 }
 
 .detail--maps-in {
-    color: #5352ed;
+    color: gray;
+    font-weight: 500;
+}
+
+.btn--create-submit {
+    margin-top: 2rem;
+}
+
+hr {
+    width: 100%;               
+    background-color: rgb(179, 179, 179);
 }
 
 .loading {
@@ -86,7 +93,7 @@ hr {
     display: flex;
     flex-direction: column;
     margin-top: 2.5rem;
-    width: 100%
+    width: 100%;
 }
 
 .cardActivity {
@@ -123,4 +130,45 @@ hr {
 
 .btn-delete:active {
     transform: scale(.9)
+}
+
+
+
+@media (max-width: 1201px) {
+    .pageDetail {
+        margin-top: 0rem;
+    }
+
+    .pageDetail--content {
+        padding-top: 0rem;
+    }
+    .countryDetail {
+        flex-direction: column;
+    }
+    .details {
+        height: 55%;
+    }
+
+    .details--info {
+        align-self: flex-start;
+        margin-top: 4rem;
+    }
+
+    .btn--create-submit {
+        align-self: flex-start;
+    }
+}
+
+@media (max-width: 768px) {
+    .slider {
+        display: none;
+    }
+
+    .details--info {
+        width: 100%
+    }
+
+    .details {
+        height: 45%;
+    }
 }

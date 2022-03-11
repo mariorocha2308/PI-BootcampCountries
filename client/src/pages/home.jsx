@@ -13,15 +13,16 @@ const Home = () => {
   const dispatch = useDispatch();
   const allCountries = useSelector(state => state.allCountries);
   const sortedCountries = useSelector(state => state.sortedCountries);
+  const renderCountries = sortedCountries?.length > 0 ? sortedCountries : allCountries
 
   const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 16;
+  const currentCountries = sortedCountries?.length > 0 ? sortedCountries.length : allCountries.length
+  const total = Math.ceil(currentCountries / postsPerPage);
 
-  const indexOfLastPost = currentPage * postsPerPage;
-  const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentCountries = sortedCountries?.length > 0 ? sortedCountries?.slice(indexOfFirstPost, indexOfLastPost) : allCountries?.slice(indexOfFirstPost, indexOfLastPost) 
-
-  const paginate = pageNumber => setCurrentPage(pageNumber);
+  const handlePageChange = (page) => {
+    setCurrentPage(page)
+  };
 
   useEffect(()=>{
     dispatch(getAllCountries())
@@ -31,11 +32,12 @@ const Home = () => {
     <div className='home'>
       <Landing/>
       <SearchBar setCurrentPage={setCurrentPage}/>
+      <div className='countries'>
       {
-        currentCountries?.length > 0 ? 
+        renderCountries?.length > 0 ? 
         <div className='countries_grid'>
           {
-            currentCountries?.map((country) => (
+            renderCountries?.slice((currentPage - 1) * postsPerPage, currentPage * postsPerPage).map((country) => (
               <Country 
                 key={country.id}
                 name={country.name.length > 11 ? country.name.slice(0,11) + "..." : country.name}
@@ -51,11 +53,8 @@ const Home = () => {
           <label className='notFound-text'>Not avalaible</label>
         </div>
       }
-      <Pagination
-        currentPage={currentPage}
-        postsPerPage={postsPerPage}
-        totalPosts={sortedCountries?.length > 0 ? sortedCountries?.length : allCountries?.length}
-        paginate={paginate}/>
+      </div>
+      <Pagination total={total} handlePageChange={handlePageChange} currentPage={currentPage}/>
     </div>
   );
 };
