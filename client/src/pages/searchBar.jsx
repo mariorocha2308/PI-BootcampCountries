@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {FaSearch} from 'react-icons/fa'
 import {NavLink} from 'react-router-dom'
 import './styles/searchBar.css'
-import { Button, Icon } from 'semantic-ui-react'
+import { Button } from 'antd'
 import Select from 'react-select'
 
 const SearchBar = ({setCurrentPage}) => {
@@ -89,7 +89,7 @@ const SearchBar = ({setCurrentPage}) => {
                 </div>
 
                 <NavLink to='/home/newActivity' >
-                    <Button icon color='twitter'><Icon name='edit'/>  New tourism</Button>
+                    <Button type='primary'>New tourism</Button>
                 </NavLink>
             </div>
             

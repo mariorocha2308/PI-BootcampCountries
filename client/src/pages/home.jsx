@@ -3,7 +3,7 @@ import Country from "./country.jsx";
 import React, { useEffect, useState } from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import { getAllCountries} from '../actions/actions.js';
-import {MdOutlineHourglassDisabled} from 'react-icons/md'
+import { Spin } from 'antd'
 import Landing from './landing.jsx'
 import Pagination from './pagination.jsx'
 import SearchBar from './searchBar.jsx'
@@ -49,8 +49,8 @@ const Home = () => {
           }
         </div>  : 
         <div className='notAvalaible'>
-          <MdOutlineHourglassDisabled className='notFound-icon'/>
-          <label className='notFound-text'>Not avalaible</label>
+          <Spin size="large"/>
+          <label className='notFound-text'>Loading</label>
         </div>
       }
       </div>

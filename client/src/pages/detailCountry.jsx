@@ -20,7 +20,6 @@ const URL_DEPLOY = process.env.REACT_APP_DEPLOY
 const DetailCountry = () => {
     const dispatch= useDispatch();
     const countryDetail = useSelector(state => state.countryDetail);
-    const [flag, setFlag] = useState()
     const [ok, setOk] = useState()
 
     //*CONVIERTE EL AREA M2 A KM2
@@ -29,11 +28,6 @@ const DetailCountry = () => {
     const { id }= useParams();
 
     useEffect(()=>{
-        fetch('https://restcountries.com/v3.1/all')
-        .then(data => data.json())
-        .then(result => {
-            result.filter(country => country.cca2 === id ? setFlag(country.flag) : null)
-        })
         dispatch(findIdCountry(id))
     },[dispatch, id, ok])
 
@@ -80,7 +74,7 @@ const DetailCountry = () => {
             <div className='pageDetail--content'>
                 <div className='details'>
                     <div className='details--info'>
-                        <h1 className='nameDetail'>{countryDetail.name} {flag}</h1> 
+                        <h1 className='nameDetail'>{countryDetail.name}</h1> 
                         <label className='capitalDetail'>{countryDetail.capital}</label>
                         <label className='detail--maps'><MdLanguage/> continent  <label className='detail--maps-in'>{countryDetail.continent}</label></label>
                         <label className='detail--maps'><MdPushPin/> subregion  <label className='detail--maps-in'>{countryDetail.subregion}</label></label>

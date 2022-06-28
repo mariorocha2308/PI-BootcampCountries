@@ -1,7 +1,8 @@
 import React from 'react'
 import {useHistory} from 'react-router-dom'
 import './styles/navbar.css'
-import { Button, Icon } from 'semantic-ui-react'
+import { SiLinkedin } from 'react-icons/si'
+import { Button } from 'antd'
 
 const Navbar = () => {
 
@@ -18,8 +19,7 @@ const Navbar = () => {
         <div className='nav'>
             <div className='nav_content'>
                 <span className="nav__title-content" onClick={navigateHome}>PI-Countries</span>
-                <Button color='linkedin' onClick={sendLinkedin}>
-                    <Icon name='linkedin'/> Mario Rocha
+                <Button type="primary" icon={<SiLinkedin style={{marginRight: '8px'}}/>} onClick={sendLinkedin}>Mario Rocha
                 </Button>
             </div>
         </div>
