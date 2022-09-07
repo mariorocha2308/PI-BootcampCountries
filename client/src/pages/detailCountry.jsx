@@ -6,7 +6,7 @@ import './styles/countryDetail.css'
 import { Button } from 'semantic-ui-react'
 import { MdPushPin, MdGpsFixed, MdLanguage, MdSupervisorAccount, MdLoyalty} from 'react-icons/md'
 import { NavLink } from 'react-router-dom';
-import Swal from 'sweetalert2'
+// import Swal from 'sweetalert2'
 import { Carousel } from 'antd';
 import 'antd/dist/antd.css';
 import img1 from './images/undraw_a_moment_to_relax_bbpa.svg'
@@ -19,7 +19,7 @@ const URL_DEPLOY = process.env.REACT_APP_DEPLOY
 
 const DetailCountry = () => {
     const dispatch= useDispatch();
-    const countryDetail = useSelector(state => state.countryDetail);
+    const { countryDetail } = useSelector(state => state.reducerSlice);
     const [ok, setOk] = useState()
 
     //*CONVIERTE EL AREA M2 A KM2
@@ -31,34 +31,38 @@ const DetailCountry = () => {
         dispatch(findIdCountry(id))
     },[dispatch, id, ok])
 
+    const onHandleOpen = () => {
+        
+    }
+
     const handleDeleteActivity = (id) => {
         fetch(`${URL_DEPLOY}/delete/activity/${id}`,{
             method: 'DELETE'
         })
         .then(data => data.json())
-        .then(result => result ?
-            Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
-            }).then((result) => {
-            if (result.isConfirmed) {
-                Swal.fire(
-                'Deleted!',
-                'User has been deleted.',
-                'success'
-                ).then(result => setOk(id))
-            }
-            }) :
-            Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'Something went wrong!'
-            })
+        .then(result => result
+            //Swal.fire({
+            // title: 'Are you sure?',
+            // text: "You won't be able to revert this!",
+            // icon: 'warning',
+            // showCancelButton: true,
+            // confirmButtonColor: '#3085d6',
+            // cancelButtonColor: '#d33',
+            // confirmButtonText: 'Yes, delete it!'
+            // }).then((result) => {
+            // if (result.isConfirmed) {
+            //     Swal.fire(
+            //     'Deleted!',
+            //     'User has been deleted.',
+            //     'success'
+            //     ).then(result => setOk(id))
+            // }
+            // }) :
+            // Swal.fire({
+            // icon: 'error',
+            // title: 'Oops...',
+            // text: 'Something went wrong!'
+            // })
         )
     }
 

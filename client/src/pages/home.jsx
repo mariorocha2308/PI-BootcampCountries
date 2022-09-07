@@ -1,9 +1,9 @@
 import "./styles/home.css";
-import Country from "./country.jsx";
 import React, { useEffect, useState } from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import { getAllCountries} from '../actions/actions.js';
-import { Spin } from 'antd'
+import Loading from "../components/Loading";
+import Country from "./country.jsx";
 import Landing from './landing.jsx'
 import Pagination from './pagination.jsx'
 import SearchBar from './searchBar.jsx'
@@ -11,8 +11,8 @@ import SearchBar from './searchBar.jsx'
 const Home = () => {
   
   const dispatch = useDispatch();
-  const allCountries = useSelector(state => state.allCountries);
-  const sortedCountries = useSelector(state => state.sortedCountries);
+  const [loading, setLoading] = useState(true)
+  const { allCountries, sortedCountries } = useSelector(state => state.reducerSlice);
   const renderCountries = sortedCountries?.length > 0 ? sortedCountries : allCountries
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -24,39 +24,38 @@ const Home = () => {
     setCurrentPage(page)
   };
 
-  useEffect(()=>{
-    dispatch(getAllCountries())
-  },[dispatch])
+  useEffect(() => {
+    if (allCountries.length === 0) {
+      dispatch(getAllCountries())
+    } else {
+      setLoading(false)
+    }
+  },[dispatch, allCountries])
+
+  if (loading) {
+    return <Loading error='Failed to get countries'/>
+  }
 
   return (
     <div className='home'>
       <Landing/>
       <SearchBar setCurrentPage={setCurrentPage}/>
       <div className='countries'>
-      {
-        renderCountries?.length > 0 ? 
         <div className='countries_grid'>
-          {
-            renderCountries?.slice((currentPage - 1) * postsPerPage, currentPage * postsPerPage).map((country) => (
-              <Country 
-                key={country.id}
-                name={country.name.length > 11 ? country.name.slice(0,11) + "..." : country.name}
-                image={country.imageFlag}
-                region={country.continent}
-                id={country.id}
-              />
-            )) 
-          }
-        </div>  : 
-        <div className='notAvalaible'>
-          <Spin size="large"/>
-          <label className='notFound-text'>Loading</label>
+          {renderCountries?.slice((currentPage - 1) * postsPerPage, currentPage * postsPerPage).map((country) => (
+            <Country 
+              key={country.id}
+              name={country.name.length > 11 ? country.name.slice(0,11) + "..." : country.name}
+              image={country.imageFlag}
+              region={country.continent}
+              id={country.id}
+            />
+          ))}
         </div>
-      }
       </div>
       <Pagination total={total} handlePageChange={handlePageChange} currentPage={currentPage}/>
     </div>
   );
 };
 
-export default Home;
+export default Home; 

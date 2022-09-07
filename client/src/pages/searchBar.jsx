@@ -9,7 +9,7 @@ import Select from 'react-select'
 
 const SearchBar = ({setCurrentPage}) => {
     
-    const extra = useSelector(state => state.allCountries)
+    const { allCountries } = useSelector(state => state.reducerSlice)
     const dispatch = useDispatch()
     
     const[input, setInput]= useState({
@@ -33,10 +33,10 @@ const SearchBar = ({setCurrentPage}) => {
         
         if(input.continent || input.order || input.tourism) {
             setCurrentPage(1)
-            dispatch(orderBy(input.continent, input.order, input.tourism))
+            dispatch(orderBy({continent: input.continent, order: input.order, tourism: input.tourism}))
         }else{
             setCurrentPage(1)
-            dispatch(orderBy(input.continent, input.order, input.tourism))
+            dispatch(orderBy({continent: input.continent, order: input.order, tourism: input.tourism}))
         }
 
     },[ dispatch,input.name, input.order, input.continent, input.tourism, setCurrentPage])
@@ -64,7 +64,7 @@ const SearchBar = ({setCurrentPage}) => {
         {value: '', label: 'All Tourism'}
     ]
     
-    extra?.map((country) => {
+    allCountries?.map((country) => {
         return country.activities?.map(activity => {
             return optionsTourism.push({ value: activity.name, label: activity.name })
         })

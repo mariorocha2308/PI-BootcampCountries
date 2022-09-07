@@ -23,7 +23,7 @@ const CreateActivity = () => {
     const dispatch = useDispatch();
     const history = useHistory();
 
-    let state = useSelector(state => state.allCountries)
+    let { allCountries } = useSelector(state => state.reducerSlice)
 
     //* LOGICA EL ESTADO DEL FORM 
     const [input, setInput]= useState({
@@ -70,7 +70,7 @@ const CreateActivity = () => {
     ]
 
     const animatedComponents = makeAnimated();
-    let optionsCountry = state.map(function (country) {
+    let optionsCountry = allCountries.map(function (country) {
         return { value: country.id, label: country.name };
     })
 
