@@ -39,8 +39,6 @@ conn.sync({ force: false }).then(() => {
                       subregion: country.subregion ? country.subregion : null,
                       area: country.area,
                       population: country.population,
-
-                      //* NEW DATA DETAIL
                       timezones: country.timezones ? country.timezones[0] : null,
                       languages: country.languages ? Object.values(country.languages) : null
                   }

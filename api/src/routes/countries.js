@@ -9,8 +9,7 @@ router.get('/countries', async (req, res) => {
     if (name) {
         
         let find = await Country.findAll({
-            where: {
-                name: {[Op.iLike]: `%${name}%`}},
+            where: {name: {[Op.iLike]: `%${name}%`}},
             include: [Activity]
         })
 
@@ -29,8 +28,30 @@ router.get('/countries', async (req, res) => {
         }
     }
     
-})  
-          
+}) 
+
+router.get('/countries/sortbar', async (req, res) => {
+
+    const { continent, order, filter } = req.query
+    const [key, value] = order?.split(' ') ?? []
+
+    try {
+        let sortCountries = await Country.findAll({
+            where: continent ? { continent: continent } : null,
+            order: order ? [[key, value]] : null,
+            include: {
+                model: Activity,
+                where: filter ? {name: filter} : null,
+            }
+        })
+
+        return res.status(200).json(sortCountries)
+
+    } catch (error) {  
+        res.status(404).json(error)
+    }
+})
+
 router.get('/countries/:idPais', async (req, res) => {
     let { idPais } = req.params
     idPais.toUpperCase()
@@ -43,24 +64,10 @@ router.get('/countries/:idPais', async (req, res) => {
 
         return res.status(200).json(country)
 
-     } catch(err){
-      res.status(404).json(err)
-     }
-
-})
-
-router.get('/countries/', async (req, res) => {
-    try {
-        const sortCountries = await Country.findAll({
-            where: {
-                [Op.or]: [
-                    { continent: 12 }
-                ]
-            }
-        })
-    } catch (error) {
-        
+    } catch(err){
+        res.status(404).json(err)
     }
+
 })
 
 module.exports = router;
