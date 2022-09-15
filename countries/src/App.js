@@ -4,7 +4,6 @@ import NavBar from './components/Navbar'
 import Home from './pages/Home'
 import PostTourism from './pages/PostTourism'
 import DetailCountry from './pages/DetailCountry'
-import 'antd/dist/antd.css';
 
 function App() {
   return (

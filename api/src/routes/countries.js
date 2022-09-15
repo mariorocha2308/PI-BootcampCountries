@@ -3,7 +3,7 @@ const { Country, Activity } = require('../db.js');
 const router = require('express').Router();
 const {Op} = require('sequelize')
 
-router.get('/countries', async (req, res) => {
+router.get('/all', async (req, res) => {
     const {name} = req.query
 
     if (name) {
@@ -30,7 +30,7 @@ router.get('/countries', async (req, res) => {
     
 }) 
 
-router.get('/countries/sortbar', async (req, res) => {
+router.get('/sortbar', async (req, res) => {
 
     const { continent, order, filter } = req.query
     const [key, value] = order?.split(' ') ?? []
@@ -52,7 +52,7 @@ router.get('/countries/sortbar', async (req, res) => {
     }
 })
 
-router.get('/countries/:idPais', async (req, res) => {
+router.get('/:idPais', async (req, res) => {
     let { idPais } = req.params
     idPais.toUpperCase()
 

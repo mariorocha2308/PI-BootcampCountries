@@ -16,7 +16,11 @@
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     border-radius: 3px;
     padding-left: 20px;
-    
+}
+
+.search--textfield-content {
+    display: flex;
+    align-items: center;
 }
 
 .search__icon-content{

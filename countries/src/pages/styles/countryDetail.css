@@ -27,23 +27,30 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 35%;
+    width: 40%;
     height: 100%;
 }
 
 .slider{
     width: 60%;
-    align-self: center;
 }
+
+.carousel--content {
+    height: 270px;
+    color: '#fff';
+    margin: auto;
+}
+
 
 .nameDetail{
     display: flex;
     color: rgb(78, 78, 78);
-    margin: 0;
+    margin-top: 1rem;
     font-size: 26px;
     font-family: 'Poppins';
     font-weight: bold;
     align-self: flex-start;
+    align-items: center;
 }
 
 .capitalDetail {

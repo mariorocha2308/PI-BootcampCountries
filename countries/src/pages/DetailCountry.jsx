@@ -1,51 +1,37 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {useParams} from 'react-router-dom';
-import { getCountryQuery } from '../utils/queries'
-import { MdPushPin, MdGpsFixed, MdLanguage, MdSupervisorAccount, MdLoyalty} from 'react-icons/md'
+import { getCountryQuery, deleteActivityQuery } from '../utils/queries'
+import { MdLoyalty} from 'react-icons/md'
 import { NavLink } from 'react-router-dom';
-import { Carousel } from 'antd';
-import img1 from './images/undraw_a_moment_to_relax_bbpa.svg'
-import img2 from './images/undraw_eiffel_tower_-3-gw8.svg'
-import img3 from './images/undraw_departing_re_mlq3.svg'
-import img4 from './images/undraw_fall_is_coming_yl-0-x.svg'
 import Agree from '../components/Modal/Agree';
-import 'antd/dist/antd.css';
+import { useQuery, useMutation, useQueryClient } from 'react-query';
 import './styles/countryDetail.css'
-import { useQuery } from 'react-query';
-
-const URL_DEPLOY = process.env.REACT_APP_DEPLOY
+import { Button, Badge } from '@chakra-ui/react';
 
 const DetailCountry = () => {
 
     const { id }= useParams();
+    const queryClient = useQueryClient()
     const { data: country } = useQuery(['country', id],() => getCountryQuery(id))
+    const { mutate, isError, error, isLoading } = useMutation(deleteActivityQuery, {
+        onSuccess: () => {
+            queryClient.invalidateQueries(['country', id])
+            onHandleClose()
+        }
+    })
     const [visible, setVisible] = useState()
-    const [ok, setOk] = useState()
+    const [target, setId] = useState()
 
     const km = country?.area / 1000000
 
-    // useEffect(()=>{
-    //     dispatch(getCountryQuery(id))
-    // },[dispatch, id, ok])
-
-    const onHandleOpen = () => {
+    const onHandleOpen = (value) => {
         setVisible(true)
+        setId(value)
     }
 
     const onHandleClose = () => {
         setVisible(false)
     }
-
-    const onHandleDeleteActivity = (id) => {
-    
-    }
-
-    const contentStyle = {
-        height: '270px',
-        color: '#fff',
-        alignSelft: 'center',
-        margin: 'auto',
-    };
 
     return ( 
         <div className='pageDetail'>
@@ -53,32 +39,19 @@ const DetailCountry = () => {
                 <div className='details'>
                     <div className='details--info'>
                         <h1 className='nameDetail'>{country?.name}</h1> 
-                        <label className='capitalDetail'>{country?.capital}</label>
-                        <label className='detail--maps'><MdLanguage/> continent  <label className='detail--maps-in'>{country?.continent}</label></label>
-                        <label className='detail--maps'><MdPushPin/> subregion  <label className='detail--maps-in'>{country?.subregion}</label></label>
-                        <label className='detail--maps'><MdGpsFixed/> area  <label className='detail--maps-in'>{km} km2</label></label>
-                        <label className='detail--maps'><MdSupervisorAccount/> population  <label className='detail--maps-in'>{country?.population}</label></label>
-                        <NavLink to='/home/newActivity' className='btn--create-submit'>
-                            <button className='button-green'>
+                        <Badge variant='outline' colorScheme='red' alignSelf='self-start' marginY='3'>{country?.capital}</Badge>
+                        <label className='detail--maps'>Continent: <label className='detail--maps-in'>{country?.continent}</label></label>
+                        <label className='detail--maps'>Subregion: <label className='detail--maps-in'>{country?.subregion}</label></label>
+                        <label className='detail--maps'>Area: <label className='detail--maps-in'>{km} km2</label></label>
+                        <label className='detail--maps'>Population: <label className='detail--maps-in'>{country?.population}</label></label>
+                        <NavLink to='/home/post/tourism' className='btn--create-submit'>
+                            <Button colorScheme='green'>
                                 Create new activity
-                            </button>
+                            </Button>
                         </NavLink>
                     </div>
-                    <div className='slider'>
-                        <Carousel autoplay>
-                            <div>
-                            <img src={img1} style={contentStyle} alt='moment to relax'/>
-                            </div>
-                            <div>
-                            <img src={img2} style={contentStyle} alt='eiffel tower'/>
-                            </div>
-                            <div>
-                            <img src={img3} style={contentStyle} alt='departing'/>
-                            </div>
-                            <div>
-                            <img src={img4} style={contentStyle} alt='fall is comming'/>
-                            </div>
-                        </Carousel>
+                    <div style={{width: '40%', height: '100%'}}>
+                        <img src={country?.imageFlag} alt={country?.id} style={{objectFit: 'cover', borderRadius: '10px'}}/>
                     </div>
                 </div>
                 <hr/>
@@ -95,12 +68,12 @@ const DetailCountry = () => {
                                     <label className='DDSActivity'>Duration: {activity.duration}</label>
                                     <label className='DDSActivity'>Season: {activity.season}</label>
                                 </div>
-                                <button className='btn-delete' onClick={onHandleOpen}>Delete</button>
+                                <button className='btn-delete' onClick={() => onHandleOpen(activity.id)}>Delete</button>
                             </div>
                         ))
                     }
                 </div>
-                <Agree visible={visible} handleOK={() => onHandleDeleteActivity(id)} handleCancel  ={onHandleClose}/>
+                <Agree isOpen={visible} handleAgree={() => mutate(target)} handleClose={onHandleClose}/>
             </div>
         </div>
     );

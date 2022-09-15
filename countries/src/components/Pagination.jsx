@@ -1,6 +1,6 @@
 import React from "react";
 import Paginate from "react-paginating";
-import '../pages/styles/pagination.css'
+import './styles/Pagination.css'
 
 const Pagination = ({total, currentPage, handlePageChange}) => {
 

@@ -1,8 +1,8 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import '../pages/styles/navbar.css'
+import './styles/Navbar.css'
 import { SiLinkedin } from 'react-icons/si'
-import { Button } from 'antd'
+import { Button } from '@chakra-ui/react'
 
 const Navbar = () => {
 
@@ -13,17 +13,18 @@ const Navbar = () => {
     }
 
     const sendLinkedin = () => {
-        window.location.href = 'https://www.linkedin.com/in/mario-de-jesus-rocha'
+        window.open('https://www.linkedin.com/in/mario-de-jesus-rocha', '_blank')
     } 
 
     return ( 
-        <div className='nav'>
+        <nav className='nav'>
             <div className='nav_content'>
-                <span className="nav__title-content" onClick={navigateHome}>PI-Countries</span>
-                <Button type="primary" icon={<SiLinkedin style={{marginRight: '8px'}}/>} onClick={sendLinkedin}>Mario Rocha
+                <label className="nav__title-content" onClick={navigateHome}>PI-Countries</label>
+                <Button leftIcon={<SiLinkedin/>} colorScheme='linkedin' variant='solid' onClick={sendLinkedin}>
+                    Mario Rocha
                 </Button>
             </div>
-        </div>
+        </nav>
     );
 }
 

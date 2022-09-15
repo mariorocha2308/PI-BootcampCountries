@@ -2,8 +2,9 @@ const { Router } = require('express');
 const { Country ,Activity } = require('../db.js');
 const router = Router();
 
-router.post('/activity', async (req, res) => {
-    const { name, difficult, duration, season, codeCountry} = req.body
+router.post('/create', async (req, res) => {
+    
+    const { name, difficult, duration, season, codeCountry } = req.body
 
     try {
         var response = codeCountry.map(async (code) => await Country.findOne({where: {id: code}}))
@@ -29,11 +30,9 @@ router.post('/activity', async (req, res) => {
     )} catch (error) {
         
     }
-    
-    
 })
 
-router.delete('/delete/activity/:id', async (req, res) => {
+router.delete('/delete/:id', async (req, res) => {
     const { id } = req.params;
 
     try {

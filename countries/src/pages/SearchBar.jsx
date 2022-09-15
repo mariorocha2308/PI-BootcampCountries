@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import {FaSearch} from 'react-icons/fa'
-import {NavLink} from 'react-router-dom'
-import './styles/searchBar.css'
-import { Button } from 'antd'
-import Select from 'react-select'
 import { searchCountriesQuery, sortCountriesQuery } from '../utils/queries'
 import { useQuery, useQueryClient } from 'react-query';
+import {NavLink} from 'react-router-dom'
+import {FaSearch} from 'react-icons/fa'
+import { Button } from '@chakra-ui/react'
+import Select from 'react-select'
+import './styles/searchBar.css'
 
 const SearchBar = ({setCurrentPage}) => {
 
@@ -63,7 +63,7 @@ const SearchBar = ({setCurrentPage}) => {
         {value: '', label: 'All Tourism'}
     ]
     
-    cache[0][1].map((country) => {
+    cache[0][1]?.map((country) => {
         return country.activities?.map(activity => {
             return optionsTourism.push({ value: `filter=${activity.name}`, label: activity.name })
         })
@@ -83,13 +83,13 @@ const SearchBar = ({setCurrentPage}) => {
     return ( 
         <div className='searchbar'>
             <div className='search_content'>
-                <div className='search__textfield-content'>
+                <div className='search--textfield-content'>
                     <FaSearch className='search__icon-content'/>
                     <input type="text" placeholder="Search a country..." onChange={handleInput} value={input.name} name='name' className='search__input-content'/>
                 </div>
 
                 <NavLink to='/home/post/tourism' >
-                    <Button type='primary'>New tourism</Button>
+                    <Button colorScheme='blue'>New tourism</Button>
                 </NavLink>
             </div>
             
