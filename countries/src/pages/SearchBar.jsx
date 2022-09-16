@@ -10,18 +10,18 @@ import './styles/searchBar.css'
 const SearchBar = ({setCurrentPage}) => {
 
     const queryClient = useQueryClient()
-    const cache = queryClient.getQueriesData()
+    const { data: cacheClient } = queryClient.getQueryState('countries')
     const [input, setInput] = useState({
         name:"",
         order: "",
         continent: "",
         filter: ""
     })
-
+    
     const searchCountries = useQuery(['countries'], () => searchCountriesQuery(input.name), {
         enabled: false
     })
-
+    
     const sortCountries = useQuery(['countries'], () => sortCountriesQuery([input.continent, input.order, input.filter]), {
         enabled: false
     })
@@ -62,8 +62,8 @@ const SearchBar = ({setCurrentPage}) => {
     const optionsTourism = [
         {value: '', label: 'All Tourism'}
     ]
-    
-    cache[0][1]?.map((country) => {
+
+    cacheClient?.map((country) => {
         return country.activities?.map(activity => {
             return optionsTourism.push({ value: `filter=${activity.name}`, label: activity.name })
         })

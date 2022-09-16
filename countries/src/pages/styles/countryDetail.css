@@ -7,8 +7,6 @@
     justify-content: center;
 }
 
-
-
 .pageDetail--content{
     height: 100%;
     width: 90%;
@@ -19,6 +17,7 @@
 .details {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     width: 100%;
     height: 50%
 }
@@ -26,7 +25,7 @@
 .details--info {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    justify-content: center;
     width: 40%;
     height: 100%;
 }
@@ -45,7 +44,7 @@
 .nameDetail{
     display: flex;
     color: rgb(78, 78, 78);
-    margin-top: 1rem;
+    margin: 0;
     font-size: 26px;
     font-family: 'Poppins';
     font-weight: bold;
