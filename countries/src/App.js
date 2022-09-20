@@ -1,11 +1,11 @@
-import './App.css';
+import React from 'react';
 import { Route, Routes } from "react-router-dom";
-import NavBar from './components/Navbar'
-import Home from './pages/Home'
-import DetailCountry from './pages/DetailCountry'
 import { useQuery } from 'react-query';
 import { getCountriesQuery } from './utils/queries';
 import Loading from './components/Loading';
+import NavBar from './components/Navbar'
+import Home from './pages/Home'
+import DetailCountry from './pages/DetailCountry'
 
 function App() {
 
@@ -16,14 +16,15 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <NavBar/>
-      
+    <frame>
       <Routes>
-        <Route path="/" element={<Home data={countries}/>}/>
-        <Route path='/home/country/:id' element={<DetailCountry/>}/>
+        <Route path="/" element={<NavBar/>}>
+
+          <Route path='/' element={<Home data={countries}/>}/>
+          <Route path="home/country/:id" element={<DetailCountry/>} />
+        </Route>
       </Routes>
-    </div>
+    </frame>
   );
 }
 

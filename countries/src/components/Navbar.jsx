@@ -1,8 +1,7 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
-import './styles/Navbar.css'
+import { useNavigate, Outlet } from 'react-router-dom'
 import { SiLinkedin } from 'react-icons/si'
-import { Button } from '@chakra-ui/react'
+import { Button, Box, Text } from '@chakra-ui/react'
 
 const Navbar = () => {
 
@@ -12,14 +11,15 @@ const Navbar = () => {
     }
 
     return ( 
-        <nav className='nav'>
-            <div className='nav_content'>
-                <label className="nav__title-content" onClick={() => navigate('/')}>PI-Countries</label>
+        <>
+            <Box display='flex' justifyContent='space-between' alignItems='center' maxWidth='1200px' width='85%' margin='auto' py='1rem'>
+                <Text fontFamily='Poppins' color='#616161' fontWeight='bold' fontSize='lg' onClick={() => navigate('/')} cursor='pointer'>PI-Countries</Text>
                 <Button leftIcon={<SiLinkedin/>} colorScheme='linkedin' variant='solid' onClick={sendLinkedin}>
                     Mario Rocha
                 </Button>
-            </div>
-        </nav>
+            </Box>
+            <Outlet/>
+        </>
     );
 }
 
