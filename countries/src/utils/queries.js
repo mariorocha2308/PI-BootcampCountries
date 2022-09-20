@@ -42,6 +42,16 @@ export const sortCountriesQuery = (queryParams) => {
   })
 }
 
+export const listActivitiesQuery = (id) => {
+
+  return new Promise((resolve, reject) => {
+    fetch(`${URL_DEPLOY}/country/list/activities/${id}`)
+    .then(response => response.json())
+    .then(result => resolve(result))
+    .catch(() => reject('Failed to get list activities'))
+  })
+}
+
 //* ACIVITY
 
 export const deleteActivityQuery = (id) => {
@@ -67,8 +77,13 @@ export const postActivityQuery = (input) => {
       }
     })
     .then(response => response.json())
-    .then(result => resolve(result))
+    .then(result => {
+      if (result.error) {
+        reject(result.error)
+        return;
+      }
+      resolve(result)
+    })
     .catch(() => reject('Failed to post activity'))
   })
-
 }

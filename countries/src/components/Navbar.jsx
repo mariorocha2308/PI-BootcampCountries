@@ -6,20 +6,15 @@ import { Button } from '@chakra-ui/react'
 
 const Navbar = () => {
 
-    const navigation = useNavigate();
-
-    const navigateHome = () => { 
-        navigation('/');
-    }
-
+    const navigate = useNavigate();
     const sendLinkedin = () => {
         window.open('https://www.linkedin.com/in/mario-de-jesus-rocha', '_blank')
-    } 
+    }
 
     return ( 
         <nav className='nav'>
             <div className='nav_content'>
-                <label className="nav__title-content" onClick={navigateHome}>PI-Countries</label>
+                <label className="nav__title-content" onClick={() => navigate('/')}>PI-Countries</label>
                 <Button leftIcon={<SiLinkedin/>} colorScheme='linkedin' variant='solid' onClick={sendLinkedin}>
                     Mario Rocha
                 </Button>

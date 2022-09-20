@@ -1,38 +1,23 @@
 import React from 'react';
-import { Alert, AlertDescription, AlertIcon, AlertTitle, Spinner } from '@chakra-ui/react'
+import { Alert, AlertDescription, AlertIcon, AlertTitle, Spinner, Text, Box, Image } from '@chakra-ui/react'
 
 const Loading = props => {
 
   if (props.load === false) {
-    return <section style={{display: 'flex', marginTop: '20rem', justifyContent: 'center'}}>
-      <Alert status='error' 
-        variant='left-accent' 
-        alignSelf='center'
-        alignItems='center'
-        justifyContent='center'
-        height='80px'
-        width='30vw'
-        fontSize='1xl'
-        fontFamily='Poppins'>
+    return <Box display='flex' mt='20rem' justifyContent='center'>
+      <Alert status='error' variant='left-accent' alignItems='center' justifyContent='center' height='80px' width='30vw' fontSize='1xl' fontFamily='Poppins'>
         <AlertIcon/>
         <AlertTitle>Error!!</AlertTitle>
         <AlertDescription>{props.error}</AlertDescription>
       </Alert>
-    </section>
+    </Box>
   }
 
   return ( 
-    <div style={{display: 'flex', marginTop: '20rem', alignSelf: 'center', flexDirection: 'column'}}>
-      <Spinner
-        thickness='4px'
-        speed='0.65s'
-        emptyColor='gray.200'
-        color='blue.500'
-        size='xl'
-        alignSelf='center'
-      />
-      <label style={{marginTop: '1rem', fontSize: '15px', fontFamily: 'Poppins'}}>Loading</label>
-    </div>
+    <Box display='flex' mt='20rem' flexDirection='column' alignItems='center'>
+      <Spinner thickness='4px' speed='0.65s' emptyColor='gray.200' color='blue.500' size='lg'/>
+      <Text fontFamily='Poppins' mt='3.5'>Loading</Text>
+    </Box>
   );
 }
 

@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import { searchCountriesQuery, sortCountriesQuery } from '../utils/queries'
+import { optionFilterContinent, optionOrder } from '../utils/selects'
 import { useQuery, useQueryClient } from 'react-query';
-import {NavLink} from 'react-router-dom'
+import PostTourism from '../components/Modal/PostTourism';
 import {FaSearch} from 'react-icons/fa'
 import { Button } from '@chakra-ui/react'
 import Select from 'react-select'
@@ -11,6 +12,7 @@ const SearchBar = ({setCurrentPage}) => {
 
     const queryClient = useQueryClient()
     const { data: cacheClient } = queryClient.getQueryState('countries')
+    const [visible, setVisible] = useState(false)
     const [input, setInput] = useState({
         name:"",
         order: "",
@@ -41,24 +43,6 @@ const SearchBar = ({setCurrentPage}) => {
     },[sortCountries.refetch, input.order, input.continent, input.filter])
 
     // VALUES FOR REACT SELECT
-
-    const optionOrder = [
-        {value: '', label: 'All Order'},
-        {value: 'order=name ASC', label: 'Ascendente'},
-        {value: 'order=name DESC', label: 'Descendente'},
-        {value: 'order=population DESC', label: 'Major Population'},
-        {value: 'order=population ASC', label: 'Menor Population'}
-    ]
-    
-    const optionFilterContinent = [
-        {value: '', label: 'All Continents'},
-        {value: 'continent=Europe', label: 'Europe'},
-        {value: 'continent=Americas', label: 'Americas'},
-        {value: 'continent=Asia', label: 'Asia'},
-        {value: 'continent=Africa', label: 'Africa'},
-        {value: 'continent=Oceania', label: 'Oceania'}
-    ]
-
     const optionsTourism = [
         {value: '', label: 'All Tourism'}
     ]
@@ -79,42 +63,42 @@ const SearchBar = ({setCurrentPage}) => {
     const selectTourism = (selectedOption) => {
         setInput({...input, filter: selectedOption.value })
     }
-
+    const onHandleClose = () => {
+        setVisible(false)
+    }
+    const onHandleOpen = () => {
+        setVisible(true)
+    }
+    
     return ( 
-        <div className='searchbar'>
-            <div className='search_content'>
+        <section className='searchbar'>
+            <section className='search_content'>
                 <div className='search--textfield-content'>
                     <FaSearch className='search__icon-content'/>
                     <input type="text" placeholder="Search a country..." onChange={handleInput} value={input.name} name='name' className='search__input-content'/>
                 </div>
 
-                <NavLink to='/home/post/tourism' >
-                    <Button colorScheme='blue'>New tourism</Button>
-                </NavLink>
-            </div>
+                <Button colorScheme='blue' onClick={onHandleOpen}>New tourism</Button>
+            </section>
             
-            <div className='filterBar'>
-                <Select className='selectStyle'
+            <section className='filterBar'>
+                <Select className='selectStyle' name="continent"
                     defaultValue={optionFilterContinent[0]}
                     onChange={selectContinent}
-                    name="continent"
                     options={optionFilterContinent}/>
 
-                <Select
-                    className='selectStyle'
+                <Select className='selectStyle' name="order"
                     defaultValue={optionOrder[0]}
                     onChange={selectOrder}
-                    name="order"
                     options={optionOrder}/>
 
-                <Select
-                    className='selectStyle'
+                <Select className='selectStyle' name='filter'
                     defaultValue={optionsTourism[0]}
                     onChange={selectTourism}
-                    name='filter'
                     options={optionsTourism.filter((current,index,options)=>options.findIndex(tourism=>(tourism.value===current.value))===index)}/>
-            </div> 
-        </div>
+            </section>
+            <PostTourism isOpen={visible} onClose={onHandleClose}/> 
+        </section>
     );
 }
 
