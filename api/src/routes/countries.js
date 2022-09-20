@@ -24,7 +24,7 @@ router.get('/all', async (req, res) => {
             const limitCountries = await Country.findAll({include:[Activity]})
             return res.status(200).json(limitCountries)
         } catch (error) {
-            console.log(error)
+            res.status(404).json(error)
         }
     }
     
@@ -52,13 +52,13 @@ router.get('/sortbar', async (req, res) => {
     }
 })
 
-router.get('/:idPais', async (req, res) => {
-    let { idPais } = req.params
-    idPais.toUpperCase()
+router.get('/:idCountry', async (req, res) => {
+    let { idCountry } = req.params
+    idCountry.toUpperCase()
 
     try{
         let country = await Country.findOne({
-            where: {id: idPais},
+            where: {id: idCountry},
             include:[Activity]
         })
 
@@ -69,5 +69,23 @@ router.get('/:idPais', async (req, res) => {
     }
 
 })
+
+router.get('/list/activities/:idCountry', async (req, res) => {
+
+    const { idCountry } = req.params
+
+    try {
+        let listActivities = await Country.findAll({
+            where: { id: idCountry },
+            include: [Activity]
+        })
+
+        return res.status(200).json(listActivities[0].activities)
+
+    } catch (error) {  
+        res.status(404).json(error)
+    }
+})
+
 
 module.exports = router;
