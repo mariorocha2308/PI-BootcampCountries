@@ -11,15 +11,15 @@ const Navbar = () => {
     }
 
     return ( 
-        <>
-            <Box display='flex' justifyContent='space-between' alignItems='center' maxWidth='1200px' width='85%' margin='auto' py='1rem'>
-                <Text fontFamily='Poppins' color='#616161' fontWeight='bold' fontSize='lg' onClick={() => navigate('/')} cursor='pointer'>PI-Countries</Text>
-                <Button leftIcon={<SiLinkedin/>} colorScheme='linkedin' variant='solid' onClick={sendLinkedin}>
+        <Box maxWidth='1200px' width='85%' margin='auto' py='1.5rem'>
+            <Box display='flex' justifyContent='space-between' alignItems='center' >
+                <Text fontFamily='Poppins' color='#616161' fontWeight='bold' fontSize={['sm', 'lg']} onClick={() => navigate('/')} cursor='pointer'>PI-Countries</Text>
+                <Button leftIcon={<SiLinkedin/>} colorScheme='linkedin' variant='solid' size={['sm', 'md']} onClick={sendLinkedin}>
                     Mario Rocha
                 </Button>
             </Box>
             <Outlet/>
-        </>
+        </Box>
     );
 }
 

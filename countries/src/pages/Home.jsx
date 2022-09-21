@@ -5,6 +5,7 @@ import Pagination from '../components/Pagination'
 import SearchBar from './SearchBar'
 import { MdHourglassDisabled } from 'react-icons/md'
 import "./styles/home.css";
+import { Box } from '@chakra-ui/react';
 
 const Home = props => {
   
@@ -17,7 +18,7 @@ const Home = props => {
   };
 
   return (
-    <div className='home'>
+    <Box>
       <Landing/>
       <SearchBar setCurrentPage={setCurrentPage}/>
       <div className='countries'>
@@ -36,7 +37,7 @@ const Home = props => {
         }
       </div>
       <Pagination total={total} handlePageChange={handlePageChange} currentPage={currentPage}/>
-    </div>
+    </Box>
   );
 };
 

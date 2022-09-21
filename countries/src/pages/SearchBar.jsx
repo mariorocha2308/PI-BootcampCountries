@@ -3,10 +3,9 @@ import { searchCountriesQuery, sortCountriesQuery } from '../utils/queries'
 import { optionFilterContinent, optionOrder } from '../utils/selects'
 import { useQuery, useQueryClient } from 'react-query';
 import PostTourism from '../components/Modal/PostTourism';
-import {FaSearch} from 'react-icons/fa'
-import { Button } from '@chakra-ui/react'
+import {FaSearch, FaFilter} from 'react-icons/fa'
+import { Box, Button, Input, InputGroup, InputRightElement, InputLeftElement, Icon, IconButton, Popover, PopoverContent, PopoverTrigger, PopoverBody, PopoverHeader, PopoverCloseButton, Stack } from '@chakra-ui/react'
 import Select from 'react-select'
-import './styles/searchBar.css'
 
 const SearchBar = ({setCurrentPage}) => {
 
@@ -71,34 +70,50 @@ const SearchBar = ({setCurrentPage}) => {
     }
     
     return ( 
-        <section className='searchbar'>
-            <section className='search_content'>
-                <div className='search--textfield-content'>
-                    <FaSearch className='search__icon-content'/>
-                    <input type="text" placeholder="Search a country..." onChange={handleInput} value={input.name} name='name' className='search__input-content'/>
-                </div>
+        <Box display='flex' justifyContent='center'>
+            <InputGroup size='md' mr='3'
+            w={['100%','70%', '60%', '40%']} >
+                <InputLeftElement pointerEvents='none'
+                    children={<Icon as={FaSearch} color='gray.500' />}/>
+                <Input type='text' onChange={handleInput} value={input.name} name='name' placeholder='Search a country' variant='filled' />
 
-                <Button colorScheme='blue' onClick={onHandleOpen}>New tourism</Button>
-            </section>
-            
-            <section className='filterBar'>
-                <Select className='selectStyle' name="continent"
-                    defaultValue={optionFilterContinent[0]}
-                    onChange={selectContinent}
-                    options={optionFilterContinent}/>
+                <InputRightElement width='4.5rem'>
+                    <Button size='sm' colorScheme='teal' onClick={onHandleOpen}>Create</Button>
+                </InputRightElement>
+            </InputGroup>
+            <Popover>
+                <PopoverTrigger>
+                    <IconButton
+                    variant='ghost'
+                    icon={<Icon as={FaFilter} color='gray.500' />}
+                    />
+                </PopoverTrigger>
+                <PopoverContent>
+                    <PopoverCloseButton />
+                    <PopoverHeader>Filter and sort</PopoverHeader>
+                    <PopoverBody display='flex' flexDirection='column'>
+                        <Stack spacing='2'>
+                            <Select name="continent"
+                                defaultValue={optionFilterContinent[0]}
+                                onChange={selectContinent}
+                                options={optionFilterContinent}/>
+                
+                            <Select name="order"
+                                defaultValue={optionOrder[0]}
+                                onChange={selectOrder}
+                                options={optionOrder}/>
+                
+                            <Select name='filter'
+                                defaultValue={optionsTourism[0]}
+                                onChange={selectTourism}
+                                options={optionsTourism.filter((current,index,options)=>options.findIndex(tourism=>(tourism.value===current.value))===index)}/>
+                        </Stack>
+                    </PopoverBody>
+                </PopoverContent>
+            </Popover>
 
-                <Select className='selectStyle' name="order"
-                    defaultValue={optionOrder[0]}
-                    onChange={selectOrder}
-                    options={optionOrder}/>
-
-                <Select className='selectStyle' name='filter'
-                    defaultValue={optionsTourism[0]}
-                    onChange={selectTourism}
-                    options={optionsTourism.filter((current,index,options)=>options.findIndex(tourism=>(tourism.value===current.value))===index)}/>
-            </section>
             <PostTourism isOpen={visible} onClose={onHandleClose}/> 
-        </section>
+        </Box>
     );
 }
 

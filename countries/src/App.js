@@ -16,7 +16,7 @@ function App() {
   }
 
   return (
-    <frame>
+    <>
       <Routes>
         <Route path="/" element={<NavBar/>}>
 
@@ -24,7 +24,7 @@ function App() {
           <Route path="home/country/:id" element={<DetailCountry/>} />
         </Route>
       </Routes>
-    </frame>
+    </>
   );
 }
 
