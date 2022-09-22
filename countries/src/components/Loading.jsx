@@ -5,7 +5,7 @@ const Loading = props => {
 
   if (props.load === false) {
     return <Box display='flex' mt='20rem' justifyContent='center'>
-      <Alert status='error' variant='left-accent' alignItems='center' justifyContent='center' height='80px' width='30vw' fontSize='1xl' fontFamily='Poppins'>
+      <Alert status='error' variant='left-accent' alignItems='center' justifyContent='center' height={['120px', '80px']} width={['70vw', '30vw']} fontSize='1xl' fontFamily='Poppins' flexDirection={{base: 'column'}}>
         <AlertIcon/>
         <AlertTitle>Error!!</AlertTitle>
         <AlertDescription>{props.error}</AlertDescription>

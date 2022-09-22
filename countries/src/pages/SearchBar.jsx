@@ -75,12 +75,14 @@ const SearchBar = ({setCurrentPage}) => {
             w={['100%','70%', '60%', '40%']} >
                 <InputLeftElement pointerEvents='none'
                     children={<Icon as={FaSearch} color='gray.500' />}/>
-                <Input type='text' onChange={handleInput} value={input.name} name='name' placeholder='Search a country' variant='filled' />
 
-                <InputRightElement width='4.5rem'>
+                <Input type='text' onChange={handleInput} value={input.name} name='name' placeholder='Search a country' fontFamily='Poppins' variant='filled' />
+
+                <InputRightElement width='5em'>
                     <Button size='sm' colorScheme='teal' onClick={onHandleOpen}>Create</Button>
                 </InputRightElement>
             </InputGroup>
+
             <Popover>
                 <PopoverTrigger>
                     <IconButton

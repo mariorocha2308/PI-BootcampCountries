@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import {useParams} from 'react-router-dom';
 import { getCountryQuery } from '../utils/queries'
 import { useQuery } from 'react-query';
-import './styles/countryDetail.css'
-import { Button, Badge, Image, Box } from '@chakra-ui/react';
+import { Button, Badge, Image, Box, Text } from '@chakra-ui/react';
 import ListActivities from '../components/Modal/ListActivities'
 
 const DetailCountry = () => {
@@ -23,26 +22,23 @@ const DetailCountry = () => {
     }
 
     return ( 
-        <div className='pageDetail'>
-            <div className='pageDetail--content'>
-                <div className='details'>
-                    <div className='details--info'>
-                        <label className='nameDetail'>{country?.name}</label> 
-                        <Badge variant='outline' colorScheme='red' alignSelf='self-start' marginBottom='5'>{country?.capital}</Badge>
-                        <label className='detail--maps'>Continent: <label className='detail--maps-in'>{country?.continent}</label></label>
-                        <label className='detail--maps'>Subregion: <label className='detail--maps-in'>{country?.subregion}</label></label>
-                        <label className='detail--maps'>Area: <label className='detail--maps-in'>{km} km2</label></label>
-                        <label className='detail--maps'>Population: <label className='detail--maps-in'>{country?.population}</label></label>
-                        
-                        <Button colorScheme='teal' width='200px' marginTop='4' onClick={onHandleOpen}>Show activities</Button>
-                    </div>
-                    <Box width='90%' height='100%' maxW='500px'>
-                        <Image src={country?.imageFlag} alt={country?.id} objectFit='cover' height='100%' width='100%' boxShadow='rgba(0, 0, 0, 0.1) 0px 4px 12px' borderRadius='10px'/>
-                    </Box>
-                </div>
-                <ListActivities isOpen={visible} onClose={onHandleClose} id={id}/>
-            </div>
-        </div>
+        <Box display='flex' justifyContent='space-around' mt='20' alignItems={{base: 'flex-start', sm: 'flex-start', md: 'flex-start'}} flexDirection={['column-reverse', 'column-reverse', 'column-reverse', 'row']}>
+            <Box display='flex' flexDirection='column' justifyContent='flex-start' fontFamily='Poppins' fontWeight='bold' mt={{base: 5, sm: 5}}>
+                <Text color='blackAlpha.700' fontSize='25'>{country?.name}</Text> 
+                <Badge variant='outline' colorScheme='red' alignSelf='self-start' mb='5' mt='2'>{country?.capital}</Badge>
+                <Text display='flex' color='blackAlpha.700'>Continent: <Text color='blackAlpha.500' ml='1'>{country?.continent}</Text></Text>
+                <Text display='flex' color='blackAlpha.700'>Subregion: <Text color='blackAlpha.500' ml='1'>{country?.subregion}</Text></Text>
+                <Text display='flex' color='blackAlpha.700'>Area: <Text color='blackAlpha.500' ml='1'>{km} km2</Text></Text>
+                <Text display='flex' color='blackAlpha.700'>Population: <Text color='blackAlpha.500' ml='1'>{country?.population}</Text></Text>
+                
+                <Button colorScheme='teal' width='200px' marginTop='4' onClick={onHandleOpen}>Show activities</Button>
+            </Box>
+            <Box width='90%' height='100%' maxW='500px'>
+                <Image src={country?.imageFlag} alt={country?.id} objectFit='cover' height='100%' width='100%' boxShadow='rgba(0, 0, 0, 0.1) 0px 4px 12px' borderRadius='10px'/>
+            </Box>
+
+            <ListActivities isOpen={visible} onClose={onHandleClose} id={id}/>
+        </Box>
     );
 }
 

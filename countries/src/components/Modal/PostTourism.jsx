@@ -12,7 +12,6 @@ const PostTourism = props => {
   const { data: cacheClient } = queryClient.getQueryState('countries')
   const { mutate, isError, error, isLoading, reset } = useMutation(postActivityQuery, {
     onSuccess: () => {
-      queryClient.invalidateQueries(['country'])
       queryClient.invalidateQueries(['countries'])
     }
   })

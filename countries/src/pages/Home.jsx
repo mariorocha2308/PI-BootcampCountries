@@ -4,8 +4,7 @@ import Landing from '../components/Landing'
 import Pagination from '../components/Pagination'
 import SearchBar from './SearchBar'
 import { MdHourglassDisabled } from 'react-icons/md'
-import "./styles/home.css";
-import { Box } from '@chakra-ui/react';
+import { Box, Grid } from '@chakra-ui/react';
 
 const Home = props => {
   
@@ -21,9 +20,11 @@ const Home = props => {
     <Box>
       <Landing/>
       <SearchBar setCurrentPage={setCurrentPage}/>
-      <div className='countries'>
+      <Box my='3rem'>
         {props.data.length !== 0 ? 
-          <div className='countries_grid'>
+          <Grid gap='8' justifyContent='space-between' 
+          templateColumns={['100%', '48%, 48%', '44% 44%', '30% 30% 30%', '22% 22% 22% 22%']}
+          templateRows={['repeat(12, 12rem)', 'repeat(12, 17rem)', 'repeat(6, 11rem)','repeat(4, 12rem)', 'repeat(3, 9rem)']}>
             {props.data?.slice((currentPage - 1) * postsPerPage, currentPage * postsPerPage)?.map((country) => (
               <Country 
                 key={country.id}
@@ -32,10 +33,12 @@ const Home = props => {
                 region={country.continent}
                 id={country.id}/>
             ))}
-          </div> 
-          : <MdHourglassDisabled style={{fontSize: '7rem', alignSelft: 'center', marginTop: '6rem'}}/>
+          </Grid> 
+          : <Box display='flex' justifyContent='center'>
+            <MdHourglassDisabled style={{fontSize: '7rem', marginTop: '6rem'}}/>
+          </Box>
         }
-      </div>
+      </Box>
       <Pagination total={total} handlePageChange={handlePageChange} currentPage={currentPage}/>
     </Box>
   );

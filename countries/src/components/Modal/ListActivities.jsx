@@ -22,8 +22,8 @@ const ListActivities = props => {
         <ModalCloseButton/>
         <ModalBody>
           {listItems?.map(item => (
-            <Box display='flex' justifyContent='space-between' alignItems='center' key={item.id}>
-              <Text>{item.name}</Text>
+            <Box display='flex' justifyContent='space-between' alignItems='center' key={item.id} my='2' fontFamily='Poppins'>
+              <Text textTransform='capitalize' color='blackAlpha.800'>{item.name}</Text>
               <Button variant='outline' colorScheme='red' onClick={() => mutate(item.id)}>Delete</Button>
             </Box>
           ))}

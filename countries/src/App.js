@@ -10,7 +10,7 @@ import DetailCountry from './pages/DetailCountry'
 function App() {
 
   const { isLoading, data: countries, error, isError } = useQuery(['countries'], getCountriesQuery)
-  
+
   if (isLoading || isError) {
     return <Loading error={error} load={isLoading}/>
   }
