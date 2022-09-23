@@ -8,6 +8,7 @@ const generator = new Generator();
 router.post('/create', async (req, res) => {
     
     const { name, difficult, duration, season, codeCountry } = req.body
+    let uuid = Number(generator.generate(6, "numbers"))
 
     try {
         
@@ -20,7 +21,6 @@ router.post('/create', async (req, res) => {
         response = await Promise.all(response)
 
         Activity.create({
-            id: generator.generate(6, "numbers"),            
             name,
             difficult,
             duration,

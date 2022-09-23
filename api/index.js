@@ -23,7 +23,7 @@ const request = require('request');
 const { Country } = require('./src/db');
 
 
-conn.sync({ force: false }).then(() => {
+conn.sync({ force: true }).then(() => {
   server.listen(process.env.PORT || 3001, () => {
     request('https://restcountries.com/v3.1/all', { json: true }, function(error, response, data) {
       if (error) { res.status(404).send('CONSULTA FALLIDA'); }
