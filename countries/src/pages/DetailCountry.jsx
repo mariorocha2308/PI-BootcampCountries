@@ -33,7 +33,7 @@ const DetailCountry = () => {
                 
                 <Button colorScheme='teal' width='200px' marginTop='4' onClick={onHandleOpen}>Show activities</Button>
             </Box>
-            <Box width='90%' height='100%' maxW='500px'>
+            <Box width='90%' height='280px' maxW='500px'>
                 <Image src={country?.imageFlag} alt={country?.id} objectFit='cover' height='100%' width='100%' boxShadow='rgba(0, 0, 0, 0.1) 0px 4px 12px' borderRadius='10px'/>
             </Box>
 

@@ -2,6 +2,9 @@ const { Router } = require('express');
 const { Country ,Activity } = require('../db.js');
 const router = Router();
 
+const Generator = require("ids-generator");
+const generator = new Generator();
+
 router.post('/create', async (req, res) => {
     
     const { name, difficult, duration, season, codeCountry } = req.body
@@ -16,7 +19,8 @@ router.post('/create', async (req, res) => {
         var response = codeCountry.map(async (code) => await Country.findOne({where: {id: code}}))
         response = await Promise.all(response)
 
-        Activity.create({            
+        Activity.create({
+            id: generator.generate(6, "numbers"),            
             name,
             difficult,
             duration,
