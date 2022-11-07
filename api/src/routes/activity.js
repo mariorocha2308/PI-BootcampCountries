@@ -2,13 +2,9 @@ const { Router } = require('express');
 const { Country ,Activity } = require('../db.js');
 const router = Router();
 
-const Generator = require("ids-generator");
-const generator = new Generator();
-
 router.post('/create', async (req, res) => {
     
     const { name, difficult, duration, season, codeCountry } = req.body
-    let uuid = Number(generator.generate(6, "numbers"))
 
     try {
         
