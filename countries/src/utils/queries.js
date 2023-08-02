@@ -6,8 +6,14 @@ export const getCountriesQuery = () => {
 
   return new Promise((resolve, reject) => {
     fetch(`${URL_DEPLOY}/country/all`)
-    .then(response => response.json())
-    .then(result => resolve(result))
+    .then(response => {
+      console.log(response)
+      return response.json()
+    })
+    .then(result => {
+      console.log(result)
+      return resolve(result)
+    })
     .catch(() => reject('Failed to get countries'))
   })
 }
