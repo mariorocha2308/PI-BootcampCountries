@@ -10,7 +10,10 @@ import { ChakraProvider } from '@chakra-ui/react'
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      cacheTime: Infinity
+      cacheTime: Infinity,
+      refetchOnWindowFocus: false,
+      retry: 2,
+      refetchOnMount: false
     }
   }
 })
