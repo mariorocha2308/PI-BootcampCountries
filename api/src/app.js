@@ -9,7 +9,7 @@ require('./db.js');
 
 const server = express();
 
-var allowlist = ['http://localhost:3000', 'https://pi-countries-one.vercel.app/']
+var allowlist = ['https://pi-countries-one.vercel.app', 'https://pi-countries-fpyrqfmxi-mariorocha2308.vercel.app/']
 var corsOptionsDelegate = function (req, callback) {
   var corsOptions;
   if (allowlist.indexOf(req.header('Origin')) !== -1) {
