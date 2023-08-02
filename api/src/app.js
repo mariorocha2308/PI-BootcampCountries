@@ -9,16 +9,15 @@ require('./db.js');
 
 const server = express();
 
-var whitelist = ['https://pi-countries-one.vercel.app/']
-
-var configCors = {
-   origin: function (origin, callback) {
-     if (whitelist.indexOf(origin) !== -1) {
-       callback(null, true)
-     } else {
-       callback(new Error('Not allowed by CORS'))
-     }
-   }
+var allowlist = ['http://localhost:3000', 'https://pi-countries-one.vercel.app/']
+var corsOptionsDelegate = function (req, callback) {
+  var corsOptions;
+  if (allowlist.indexOf(req.header('Origin')) !== -1) {
+    corsOptions = { origin: true } // reflect (enable) the requested origin in the CORS response
+  } else {
+    corsOptions = { origin: false } // disable CORS for this request
+  }
+  callback(null, corsOptions) // callback expects two parameters: error and options
 }
       
 server.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
@@ -26,6 +25,6 @@ server.use(bodyParser.json({ limit: '50mb' }));
 
 server.use(cookieParser());
 server.use(morgan('dev'));
-server.use('/', cors(configCors), routes);
+server.use('/', cors(corsOptionsDelegate), routes);
 
 module.exports = server;
