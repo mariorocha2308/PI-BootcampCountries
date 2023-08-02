@@ -9,17 +9,16 @@ require('./db.js');
 
 const server = express();
 
-var whitelist = ['http://localhost:3000']
+var whitelist = ['https://pi-countries-one.vercel.app/']
 
 var configCors = {
-  origin: '*'
-  // origin: function (origin, callback) {
-  //   if (whitelist.indexOf(origin) !== -1) {
-  //     callback(null, true)
-  //   } else {
-  //     callback(new Error('Not allowed by CORS'))
-  //   }
-  // }
+   origin: function (origin, callback) {
+     if (whitelist.indexOf(origin) !== -1) {
+       callback(null, true)
+     } else {
+       callback(new Error('Not allowed by CORS'))
+     }
+   }
 }
       
 server.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
